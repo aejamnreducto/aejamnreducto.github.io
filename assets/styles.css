@@ -1,27 +1,28 @@
 /* =====================================================================
-   Styles. Colors and fonts are tokens at the top: change them there to
-   restyle the whole site. Light theme first, dark theme below.
+   Styles. Colors and fonts are tokens at the top: change them here to
+   restyle the whole site. The site always uses this dark theme, whatever
+   the visitor's device setting.
    ===================================================================== */
-:root {
-  color-scheme: light;
-  --bg: #F5F6F3;          /* page ground, a faint green-grey paper */
-  --surface: #FCFCFB;     /* raised panels and charts */
-  --ink: #16201C;         /* primary text */
-  --ink-2: #3D4943;       /* secondary text */
-  --muted: #5F6B65;       /* captions */
-  --rule: #DCE1DC;        /* hairlines */
-  --rule-strong: #B9C2BC;
-  --accent: #2456B8;      /* links and primary actions, search-result blue */
-  --accent-ink: #FFFFFF;
-  --accent-soft: #E6ECF8;
-  --verified: #0E7A5B;    /* "confirmed in the CRM" green */
-  --s0: #2456B8;          /* chart series 1: PRIME Philippines */
-  --s1: #0E8A66;          /* chart series 2: GreatWork */
-  --lv-own: #2456B8;
-  --lv-build: #0E7A5B;
-  --lv-report: #8A5A00;
-  --lv-sales: #7A857F;
-  --shadow: 0 1px 2px rgba(22, 32, 28, .06), 0 8px 24px rgba(22, 32, 28, .06);
+:root, :root[data-theme="light"], :root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #101613;          /* page background, near-black */
+  --surface: #161E1A;     /* raised panels and charts */
+  --ink: #E4EBE7;         /* primary text, off-white */
+  --ink-2: #C3CDC8;       /* secondary text */
+  --muted: #95A39C;       /* captions */
+  --rule: #26312C;        /* hairlines */
+  --rule-strong: #3A4741;
+  --accent: #8BAEF2;      /* links and primary buttons */
+  --accent-ink: #0D1512;  /* text on primary buttons */
+  --accent-soft: #1B2A40;
+  --verified: #4CC39E;    /* "confirmed in the CRM" green */
+  --s0: #5A86E0;          /* chart series 1: PRIME Philippines */
+  --s1: #23A078;          /* chart series 2: GreatWork */
+  --lv-own: #8BAEF2;
+  --lv-build: #4CC39E;
+  --lv-report: #E0B35C;
+  --lv-sales: #8A9690;
+  --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.25);
 
   --f-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
   --f-body: "Public Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
@@ -35,24 +36,6 @@
   --step-4: clamp(2.5rem, 1.6rem + 4.2vw, 4.75rem);
   --gutter: clamp(16px, 4vw, 40px);
   --radius: 10px;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    color-scheme: dark;
-    --bg: #101613; --surface: #161E1A; --ink: #E4EBE7; --ink-2: #C3CDC8; --muted: #95A39C;
-    --rule: #26312C; --rule-strong: #3A4741; --accent: #8BAEF2; --accent-ink: #0D1512; --accent-soft: #1B2A40;
-    --verified: #4CC39E; --s0: #5A86E0; --s1: #23A078;
-    --lv-own: #8BAEF2; --lv-build: #4CC39E; --lv-report: #E0B35C; --lv-sales: #8A9690;
-    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.25);
-  }
-}
-:root[data-theme="dark"] {
-  color-scheme: dark;
-  --bg: #101613; --surface: #161E1A; --ink: #E4EBE7; --ink-2: #C3CDC8; --muted: #95A39C;
-  --rule: #26312C; --rule-strong: #3A4741; --accent: #8BAEF2; --accent-ink: #0D1512; --accent-soft: #1B2A40;
-  --verified: #4CC39E; --s0: #5A86E0; --s1: #23A078;
-  --lv-own: #8BAEF2; --lv-build: #4CC39E; --lv-report: #E0B35C; --lv-sales: #8A9690;
-  --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.25);
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -295,7 +278,9 @@ thead th { font: 500 .6875rem var(--f-mono); text-transform: uppercase; letter-s
 .g-item span { display: block; padding: 10px 12px; font-weight: 600; font-size: .875rem; }
 dialog { border: 0; border-radius: var(--radius); padding: 20px; max-width: min(960px, 92vw); background: var(--surface); color: var(--ink); }
 dialog::backdrop { background: rgba(10, 14, 12, .72); }
-dialog img { border-radius: 6px; margin-bottom: 12px; }
+dialog img { display: block; max-height: 72vh; width: auto; margin: 0 auto 12px; border-radius: 6px; }
+dialog h3 { font-size: 1.125rem; margin-bottom: 4px; }
+dialog p { color: var(--ink-2); font-size: .9375rem; }
 dialog .close { float: right; margin-bottom: 10px; }
 
 /* credentials */
@@ -303,7 +288,13 @@ dialog .close { float: right; margin-bottom: 10px; }
 .cred-grid h3 { font-size: 1.0625rem; margin-bottom: 8px; }
 .certs { list-style: none; margin: 0; padding: 0; }
 .certs li { display: flex; justify-content: space-between; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--rule); }
-.certs li > div:first-child { display: grid; gap: 2px; }
+.certs li > div:not(.cert-date) { display: grid; gap: 2px; }
+.certs li.has-thumb { justify-content: flex-start; align-items: center; }
+.certs li.has-thumb .cert-date { margin-left: auto; }
+.cert-thumb { flex: none; width: 84px; aspect-ratio: 4 / 3; padding: 0; border: 1px solid var(--rule-strong); border-radius: 6px; overflow: hidden; background: var(--surface); cursor: zoom-in; }
+.cert-thumb img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.cert-thumb:hover { border-color: var(--ink); }
+@media (max-width: 520px) { .cert-thumb { width: 64px; } }
 .certs strong { font-weight: 600; font-size: .9375rem; }
 .certs span { font-size: .8125rem; color: var(--ink-2); }
 .cert-date { text-align: right; display: grid; gap: 2px; align-content: start; white-space: nowrap; }

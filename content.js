@@ -619,13 +619,16 @@ window.PORTFOLIO = {
   gallery: [],
 
   /* ---------- Certifications & education ---------- */
+  // "image": a photo or scan of the certificate in site/assets/img/certs/.
+  // Upload a file with exactly that name and a thumbnail appears; until
+  // then the row shows without one. "url": a public verification link.
   certifications: [
-    { name: "Advanced Digital Marketing Expert", issuer: "London International Studies and Research Center (LISRC)", date: "Aug 2024", status: "", url: "" },
-    { name: "Digital Marketing Certification", issuer: "KHDA", date: "Aug 2024", status: "", url: "" },
-    { name: "Google Ads Search Certification", issuer: "Google Skillshop", date: "Sep 2024", status: "", url: "" },
-    { name: "Google Ads Display Certification", issuer: "Google Skillshop", date: "Sep 2024", status: "", url: "" },
-    { name: "Strategy of Content Marketing", issuer: "University of California (online)", date: "Apr 2020", status: "", url: "" },
-    { name: "Introduction to Personal Branding", issuer: "University of Virginia (online)", date: "Apr 2020", status: "", url: "" }
+    { name: "Advanced Digital Marketing Expert", issuer: "London International Studies and Research Center (LISRC)", date: "Aug 2024", status: "", url: "https://certifications.lisrc.org/verification/AlAejamnCalderonReducto/2635", image: "assets/img/certs/lisrc-digital-marketing.jpg" },
+    { name: "Digital Marketing Certification (KHDA-attested)", issuer: "Immersive Business Training DMCC, Dubai", date: "Aug 2024", status: "", url: "", image: "assets/img/certs/khda-digital-marketing.jpg" },
+    { name: "Google Ads Search Certification", issuer: "Google Skillshop", date: "Sep 2024", status: "", url: "", image: "assets/img/certs/google-ads-search.jpg" },
+    { name: "Google Ads Display Certification", issuer: "Google Skillshop", date: "Sep 2024", status: "", url: "", image: "assets/img/certs/google-ads-display.jpg" },
+    { name: "Strategy of Content Marketing", issuer: "University of California (online)", date: "Apr 2020", status: "", url: "", image: "assets/img/certs/uc-content-marketing.jpg" },
+    { name: "Introduction to Personal Branding", issuer: "University of Virginia (online)", date: "Apr 2020", status: "", url: "", image: "assets/img/certs/uva-personal-branding.jpg" }
   ],
   education: [
     { degree: "BS Business Administration, Major in Business Management", school: "University of the East, Manila", years: "2015 – 2019" }

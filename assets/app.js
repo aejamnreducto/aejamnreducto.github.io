@@ -535,6 +535,19 @@
       }).join("") + "</div></div>";
   })();
 
+  /* ---------- shared lightbox (gallery and certificates) ---------- */
+  var lb = document.createElement("dialog");
+  lb.id = "lightbox"; lb.setAttribute("aria-label", "Enlarged image");
+  lb.innerHTML = "<button type='button' class='btn small close' id='lb-close'>Close</button><div id='lb-body'></div>";
+  document.body.appendChild(lb);
+  function openLightbox(html) {
+    $("#lb-body").innerHTML = html;
+    if (lb.showModal) lb.showModal(); else lb.setAttribute("open", "");
+  }
+  function closeLightbox() { if (lb.close) lb.close(); else lb.removeAttribute("open"); }
+  $("#lb-close").addEventListener("click", closeLightbox);
+  lb.addEventListener("click", function (e) { if (e.target === lb) closeLightbox(); });
+
   /* ---------- gallery ---------- */
   (function () {
     if (!has(C.gallery)) { $("#gallery").remove(); return; }
@@ -544,9 +557,7 @@
         cats.map(function (c) { return "<button type='button' class='chip' aria-pressed='false' data-gcat='" + esc(c) + "'>" + esc(c) + "</button>"; }).join("") + "</div>" : "") +
       "<ul class='gallery'>" + C.gallery.map(function (g, i) {
         return "<li data-gcat='" + esc(g.category || "") + "'><button type='button' class='g-item' data-g='" + i + "'><img src='" + esc(g.image) + "' alt='" + esc(g.alt || g.title) + "' loading='lazy'><span>" + esc(g.title) + "</span></button></li>";
-      }).join("") + "</ul></div>" +
-      "<dialog id='lightbox' aria-label='Enlarged work sample'><button type='button' class='close' id='lb-close'>Close</button><div id='lb-body'></div></dialog>";
-    var dlg = $("#lightbox");
+      }).join("") + "</ul></div>";
     $("#gallery").addEventListener("click", function (e) {
       var chip = e.target.closest(".chip");
       if (chip) {
@@ -557,12 +568,9 @@
       }
       var it = e.target.closest(".g-item"); if (!it) return;
       var g = C.gallery[+it.getAttribute("data-g")];
-      $("#lb-body").innerHTML = "<img src='" + esc(g.image) + "' alt='" + esc(g.alt || g.title) + "'><h3>" + esc(g.title) + "</h3>" +
-        (g.context ? "<p>" + esc(g.context) + "</p>" : "") + (g.role ? "<p><strong>My role:</strong> " + esc(g.role) + "</p>" : "") + (g.year ? "<p class='muted'>" + esc(g.year) + "</p>" : "");
-      if (dlg.showModal) dlg.showModal(); else dlg.setAttribute("open", "");
+      openLightbox("<img src='" + esc(g.image) + "' alt='" + esc(g.alt || g.title) + "'><h3>" + esc(g.title) + "</h3>" +
+        (g.context ? "<p>" + esc(g.context) + "</p>" : "") + (g.role ? "<p><strong>My role:</strong> " + esc(g.role) + "</p>" : "") + (g.year ? "<p class='muted'>" + esc(g.year) + "</p>" : ""));
     });
-    $("#lb-close").addEventListener("click", function () { dlg.close ? dlg.close() : dlg.removeAttribute("open"); });
-    dlg.addEventListener("click", function (e) { if (e.target === dlg) dlg.close(); });
   })();
   function uniqArr(a) { return a.filter(function (v, i) { return a.indexOf(v) === i; }); }
 
@@ -572,15 +580,27 @@
     if (!certs.length && !edu.length) return;
     $("#credentials").innerHTML = "<div class='wrap'>" + head("Credentials", "Certifications and education") +
       "<div class='cred-grid'>" +
-        "<section><h3>Certifications</h3><ul class='certs'>" + certs.map(function (c) {
+        "<section><h3>Certifications</h3><ul class='certs'>" + certs.map(function (c, i) {
           var name = c.url ? "<a href='" + esc(c.url) + "' target='_blank' rel='noopener'>" + esc(c.name) + "</a>" : esc(c.name);
-          return "<li><div><strong>" + name + "</strong><span>" + esc(c.issuer) + "</span></div><div class='cert-date'><span>" + esc(c.date) + "</span>" + (c.status ? "<em>" + esc(c.status) + "</em>" : "") + "</div></li>";
+          var thumb = c.image ? "<button type='button' class='cert-thumb' data-cert='" + i + "' aria-label='View certificate: " + esc(c.name) + "'><img src='" + esc(c.image) + "' alt=''></button>" : "";
+          return "<li" + (thumb ? " class='has-thumb'" : "") + ">" + thumb + "<div><strong>" + name + "</strong><span>" + esc(c.issuer) + "</span></div><div class='cert-date'><span>" + esc(c.date) + "</span>" + (c.status ? "<em>" + esc(c.status) + "</em>" : "") + "</div></li>";
         }).join("") + "</ul></section>" +
         "<section><h3>Education</h3><ul class='certs'>" + edu.map(function (e) {
           return "<li><div><strong>" + esc(e.degree) + "</strong><span>" + esc(e.school) + "</span></div><div class='cert-date'><span>" + esc(e.years) + "</span></div></li>";
         }).join("") + "</ul>" +
         (has(C.languages) ? "<h3 class='lang-h'>Languages</h3><p>" + C.languages.map(esc).join(" · ") + "</p>" : "") +
         "</section></div></div>";
+    // A certificate image that hasn't been uploaded yet is simply left out.
+    $all("#credentials .cert-thumb img").forEach(function (img) {
+      var drop = function () { var li = img.closest("li"); img.closest(".cert-thumb").remove(); if (li) li.classList.remove("has-thumb"); };
+      if (img.complete && img.naturalWidth === 0) drop(); else img.addEventListener("error", drop);
+    });
+    $("#credentials").addEventListener("click", function (e) {
+      var b = e.target.closest(".cert-thumb"); if (!b) return;
+      var c = certs[+b.getAttribute("data-cert")];
+      openLightbox("<img src='" + esc(c.image) + "' alt='Certificate: " + esc(c.name) + "'><h3>" + esc(c.name) + "</h3><p>" + esc(c.issuer) + (c.date ? " · " + esc(c.date) : "") + "</p>" +
+        (c.url ? "<p><a href='" + esc(c.url) + "' target='_blank' rel='noopener'>Verify this certificate</a></p>" : ""));
+    });
   })();
 
   /* ---------- contact ---------- */
