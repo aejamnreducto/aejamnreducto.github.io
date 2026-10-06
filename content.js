@@ -36,20 +36,20 @@ window.PORTFOLIO = {
      ===================================================================== */
   numbers: {
     since:          "Mar 16, 2026",   // start of the PRIME / GreatWork figures
-    lastUpdated:    "September 2026", // shown in the footer
+    lastUpdated:    "October 2026",   // shown in the footer
 
     campaignsTotal: "60+",       // all Google Ads campaigns, every account
-    primeCampaigns: "46+",
+    primeCampaigns: "47+",
     gwCampaigns:    "13+",
 
     primeLeads:     "500+",      // Salesforce, Google Ads leads
     gwLeads:        "400+",      // Salesforce, Google Ads + Website leads
     primeQualRate:  "50%+",
-    gwQualRate:     "29%+",
+    gwQualRate:     "31%+",
 
-    primeClicks:    "30,000+",
+    primeClicks:    "33,000+",
     gwClicks:       "20,000+",
-    primeImpr:      "300,000+",
+    primeImpr:      "335,000+",
     gwImpr:         "250,000+",
     primeCtr:       "9.9%",
     gwCtr:          "8.3%"
@@ -62,27 +62,27 @@ window.PORTFOLIO = {
      Every row must have the same number of entries as "months".
      ===================================================================== */
   monthly: {
-    months:       ["2026-03", "2026-04", "2026-05", "2026-06", "2026-07", "2026-08", "2026-09"],
-    note:         "Monthly figures are actual counts. March covers March 16 to 31 and September covers September 1 to 27. PRIME has no Google Ads-tagged leads before April, when click-ID capture started. GreatWork excludes July 11 to 13, 2026.",
+    months:       ["2026-03", "2026-04", "2026-05", "2026-06", "2026-07", "2026-08", "2026-09", "2026-10"],
+    note:         "Monthly figures are actual counts. March covers March 16 to 31 and October covers October 1 to 5. PRIME has no Google Ads-tagged leads before April, when click-ID capture started. GreatWork excludes July 11 to 13, 2026.",
     leads: {
-      prime:      [null,  7,    34,   67,   76,   123,  109],
-      greatwork:  [1,     33,   54,   89,   103,  28,   52]
+      prime:      [null,  7,    34,   67,   76,   123,  123,  10],
+      greatwork:  [1,     33,   54,   89,   103,  28,   64,   6]
     },
     qualified: {
-      prime:      [null,  5,    12,   39,   46,   56,   51],
-      greatwork:  [null,  14,   11,   29,   17,   13,   22]
+      prime:      [null,  5,    12,   39,   46,   57,   61,   3],
+      greatwork:  [null,  14,   11,   29,   17,   13,   34,   0]
     },
     clicks: {
-      prime:      [2670,  5669,  5560,  2404,  4348,  7049,  4411],
-      greatwork:  [2086,  5596,  5408,  2935,  2271,  322,   1071]
+      prime:      [2670,  5669,  5560,  2404,  4348,  7049,  4961,  724],
+      greatwork:  [2086,  5596,  5408,  2935,  2271,  322,   1222,  185]
     },
     impressions: {
-      prime:      [24092, 53891, 56355, 26939, 56920, 65282, 40058],
-      greatwork:  [20356, 54591, 63215, 40995, 37205, 4977,  15419]
+      prime:      [24092, 53891, 56355, 26939, 56920, 65282, 45801, 7669],
+      greatwork:  [20356, 54591, 63215, 40995, 37205, 4977,  17433, 2332]
     },
     ctr: {
-      prime:      [11.1,  10.5,  9.9,   8.9,   7.6,   10.8,  11.0],
-      greatwork:  [10.2,  10.3,  8.6,   7.2,   6.1,   6.5,   6.9]
+      prime:      [11.1,  10.5,  9.9,   8.9,   7.6,   10.8,  10.8,  9.4],
+      greatwork:  [10.2,  10.3,  8.6,   7.2,   6.1,   6.5,   7.0,   7.9]
     }
   },
 
