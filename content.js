@@ -167,7 +167,7 @@ window.PORTFOLIO = {
         "Set up lead-generation and direct-purchase campaigns for GreatWork, each with its own conversion tracking.",
         "Implement and troubleshoot conversion tracking in Google Ads, Google Tag Manager, and GA4, including Enhanced Conversions, working with developers on lead-form tracking and attribution.",
         "Optimize Meta Ads campaigns and fix conversion tracking for PRIME Philippines.",
-        "Build WordPress landing pages with on-page SEO for PRIME Philippines and work with IT on site issues.",
+        "Build WordPress service and location landing pages with on-page SEO for PRIME Philippines and GreatWork, and work with IT on site issues.",
         "Review Performance Max asset performance and placement exclusions; use Auction Insights to guide bids and budget.",
         "Designed and run a 15-point SEM audit and reporting framework across both accounts.",
         "Train and manage one marketing intern, from digital marketing fundamentals to hands-on Google Ads work."
@@ -327,14 +327,14 @@ window.PORTFOLIO = {
     {
       id: "landing-pages",
       title: "Landing pages that match the ad",
-      org: "PRIME Philippines",
+      org: "PRIME Philippines and GreatWork",
       industry: "Commercial real estate",
       period: "Mar 2026 – Present",
       categories: ["web"],
       role: "Built",
       context: "Property searches are specific: a location, a property type, a size. A generic page loses the visitor that a specific ad just earned.",
       objective: "Send paid traffic to pages that answer the search and make inquiring easy.",
-      contribution: "I build and optimize the WordPress landing pages for PRIME's campaigns and work with IT and developers on site bugs.",
+      contribution: "I build and optimize the WordPress landing pages for PRIME Philippines and GreatWork campaigns and work with IT and developers on site bugs.",
       implementation: [
         "Page copy and layout aligned to each campaign's keywords and ad copy.",
         "On-page SEO on every page: focus keyword, meta description, URL slug, and image alt text, descriptions, and captions.",
@@ -381,14 +381,16 @@ window.PORTFOLIO = {
       contribution: "I handled the project end to end as a freelancer alongside my role at InstaShop.",
       implementation: [
         "Designed and built a responsive website for the business.",
-        "Keyword research and on-page SEO for local search visibility.",
+        "Keyword research, three long-form blog posts, and on-page SEO for local search in Al Ain.",
+        "Submitted the sitemap and requested indexing in Google Search Console, and optimized the shop's Google Business Profile.",
+        "Installed Google Tag Manager and GA4 to track site traffic.",
         "Built and managed a Google Ads Search campaign: copy, assets, and budget."
       ],
       results: [
-        "Website launched, with a Google Ads Search campaign built and managed for the client."
+        "Website launched, crawled, and indexed, with a Google Ads Search campaign built and managed for the client."
       ],
       takeaway: "Owning the site, the SEO, and the ads together shows quickly where each channel helps the other.",
-      tools: ["Website build", "On-page SEO", "Google Ads Search"]
+      tools: ["Website build", "On-page SEO", "Google Search Console", "Google Business Profile", "Google Ads Search"]
     },
     {
       id: "meta-ads-cargo",
@@ -415,6 +417,91 @@ window.PORTFOLIO = {
       tools: ["Meta Ads", "Facebook Insights", "WhatsApp Business"]
     }
   ],
+
+  /* ---------- SEO ---------- */
+  // Search engine optimization work, one entry per project. Each project
+  // lists what was done, grouped by area. Add a project by copying one.
+  // Leave projects: [] to hide the section.
+  seo: {
+    intro: "I treat SEO as the organic side of the same job: find what people actually search for, build pages that answer it, and make sure search engines can crawl, index, and show them.",
+    // The steps shown under the heading. Each item is one step.
+    process: ["keyword research", "content", "on-page", "crawl & index", "local listing", "measure"],
+    projects: [
+      {
+        id: "seo-mk",
+        name: "Local SEO for an auto repair shop",
+        org: "MK Car Repair (freelance client)",
+        location: "Al Ain, UAE",
+        period: "Nov 2024 – May 2025",
+        role: "Freelance, sole marketer",
+        summary: "I built the site, so I owned its SEO from the start: keyword research, the content, on-page optimization, getting pages crawled and indexed, and the shop's local listing.",
+        groups: [
+          { label: "Keyword research", items: [
+            "Used keyword research tools to find what drivers in the area actually search for.",
+            "Chose page targets and blog topics from that search data, not from guesses."
+          ] },
+          { label: "Content", items: [
+            "Wrote and published three long-form blog posts on repair times, car maintenance, and fuel efficiency, each built around a real search question.",
+            "Structured every post with H2 and H3 headings that answer the question directly."
+          ] },
+          { label: "On-page", items: [
+            "Local-intent page titles and meta descriptions, such as a homepage title built around car repair and maintenance in Al Ain.",
+            "URL slugs, image alt text, canonical URLs, and social sharing tags.",
+            "Internal links from blog posts to the Services page and between related posts."
+          ] },
+          { label: "Crawling & indexing", items: [
+            "Submitted the XML sitemap in Google Search Console and requested indexing for new pages through URL Inspection.",
+            "Checked crawl and indexing status in Search Console to make sure every page could be found.",
+            "Compressed images to keep pages fast."
+          ] },
+          { label: "Local search", items: [
+            "Optimized the shop's Google Business Profile for local and Maps search."
+          ] },
+          { label: "Measurement", items: [
+            "Installed Google Tag Manager and set up GA4 to track site traffic."
+          ] }
+        ],
+        // Search Console figures. Shown as tiles with the note under them.
+        stats: [
+          { value: "11,000+", label: "Google Search impressions, with 100+ clicks" },
+          { value: "#1", label: "average position when people search the shop's name" },
+          { value: "4,600+", label: "impressions on one blog post, about repair times" },
+          { value: "5.7", label: "average position across all searches in March 2026, up from 22 to 29 in mid-2025" }
+        ],
+        statsNote: "Google Search Console, June 11, 2025 to October 9, 2026. Search Console keeps only 16 months of data, so these figures start after my work on the site ended in May 2025. I haven't worked on the site since then, so they show how the pages I built and optimized kept performing on their own. As of October 2026 the site still appears in Google results for \"car repair al ain\".",
+        tools: ["WordPress", "Google Search Console", "Google Business Profile", "Keyword research tools", "Google Tag Manager", "GA4"]
+      },
+      {
+        id: "seo-prime",
+        name: "Service and location landing pages",
+        org: "PRIME Philippines and GreatWork",
+        location: "Philippines",
+        period: "Mar 2026 – Present",
+        role: "Built",
+        summary: "I build the WordPress landing pages for both brands. Each page targets one service in one location, so it can rank on its own in organic search and also match the Google Ads campaigns that send traffic to it.",
+        groups: [
+          { label: "Page structure", items: [
+            "One page per property type and location, such as office space in Cebu, commercial lots in Cavite, and warehouses in Quezon City.",
+            "Supporting sections that answer local intent, such as why businesses choose that location."
+          ] },
+          { label: "On-page", items: [
+            "Title tag, H1, meta description, and URL slug built on the same \"[property type] for lease in [location]\" keyword.",
+            "Image alt text, descriptions, and captions."
+          ] },
+          { label: "Internal links", items: [
+            "Links from each page to the matching property listings, plus an inquiry form on the page."
+          ] },
+          { label: "Content", items: [
+            "Page copy aligned to each campaign's keywords and ad copy, so the page matches what the searcher typed."
+          ] },
+          { label: "Site issues", items: [
+            "Site-level fixes handled with IT and developers."
+          ] }
+        ],
+        tools: ["WordPress", "On-page SEO"]
+      }
+    ]
+  },
 
   /* ---------- Performance dashboard ---------- */
   // Only cleared, aggregate figures. Values marked floor: true are
@@ -589,6 +676,8 @@ window.PORTFOLIO = {
       items: [
         { name: "WordPress", how: "Landing page builds and troubleshooting." },
         { name: "On-page SEO", how: "Focus keywords, meta descriptions, URL slugs, image alt text, image descriptions and captions, and blog posts." },
+        { name: "Google Search Console", how: "Sitemap submission, indexing requests, crawl and index checks, and search performance reports." },
+        { name: "Local SEO", how: "Service and location pages, local-intent titles and meta descriptions, and Google Business Profile optimization." },
         { name: "Ad copywriting", how: "Copy written to match landing pages and search intent." },
         { name: "Product photography & content", how: "Led photography and content initiatives at InstaShop." }
       ]
@@ -616,7 +705,24 @@ window.PORTFOLIO = {
   // { title: "...", image: "assets/img/file.jpg", alt: "...", category: "Landing page",
   //   context: "What it is", role: "What I did", year: "2026" }
   // The section stays hidden while this list is empty.
-  gallery: [],
+  gallery: [
+    { title: "Warehouse for lease in Quezon City: hero", image: "assets/img/work/prime-warehouse-qc-hero.jpg",
+      alt: "Landing page hero with the headline Warehouse For Lease in Quezon City for Efficient Business Operations and an Inquire Now button",
+      category: "Landing page", context: "A PRIME Philippines service and location page. The target keyword, warehouse for lease in Quezon City, leads the H1, title tag, meta description, and URL.",
+      role: "Built the page in WordPress and wrote the on-page SEO.", year: "2026" },
+    { title: "Warehouse for lease in Quezon City: listings", image: "assets/img/work/prime-warehouse-qc-listings.jpg",
+      alt: "Section titled Curated Warehouse For Lease In Quezon City with three property listing cards",
+      category: "Landing page", context: "The keyword repeats in a supporting heading, and each card links to its property listing page.",
+      role: "Built the section and the internal links to the listings.", year: "2026" },
+    { title: "Warehouse for lease in Quezon City: location section", image: "assets/img/work/prime-warehouse-qc-overview.jpg",
+      alt: "Section titled Why Businesses Choose Quezon City for Warehouse Leasing with body copy and a warehouse photo",
+      category: "Landing page", context: "Copy that answers local intent: road access, truck access, and the specifications occupiers compare.",
+      role: "Built the section and optimized the copy and image for search.", year: "2026" },
+    { title: "Warehouse for lease in Quezon City: inquiry form", image: "assets/img/work/prime-warehouse-qc-inquiry.jpg",
+      alt: "Inquiry section titled We Advise. You Advance. with a lead form asking for name, company, and email",
+      category: "Landing page", context: "The inquiry form on the page. Submissions are created as leads in Salesforce.",
+      role: "Built the page and set up conversion tracking on the form.", year: "2026" }
+  ],
 
   /* ---------- Certifications & education ---------- */
   // "image": a photo or scan of the certificate in site/assets/img/certs/.

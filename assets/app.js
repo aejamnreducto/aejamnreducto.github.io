@@ -91,6 +91,7 @@
     { id: "about", label: "About", on: !!C.about },
     { id: "experience", label: "Experience", on: has(C.experience) },
     { id: "work", label: "Case studies", on: has(C.caseStudies) },
+    { id: "seo", label: "SEO", on: !!(C.seo && has(C.seo.projects)) },
     { id: "results", label: "Results", on: !!C.dashboard },
     { id: "journey", label: "Lead journey", on: !!C.journey },
     { id: "skills", label: "Skills", on: has(C.skills) },
@@ -483,6 +484,33 @@
       var p = mo.split("-"); return n[+p[1] - 1] + (short ? "" : " " + p[0]);
     }
     drawTrend();
+  })();
+
+  /* ---------- SEO ---------- */
+  (function () {
+    var S = C.seo; if (!S || !has(S.projects)) return;
+    var steps = has(S.process) ? "<p class='trace seo-trace' aria-label='How I approach SEO'>" + S.process.map(function (t, i) {
+      return (i ? "<i aria-hidden='true'>→</i>" : "") + "<span" + (i === S.process.length - 1 ? " class='end'" : "") + ">" + esc(t) + "</span>";
+    }).join("") + "</p>" : "";
+    $("#seo").innerHTML = "<div class='wrap'>" + head("SEO", "Search visibility, from keyword to index", S.intro) + steps +
+      "<div class='seo-list'>" + S.projects.map(function (pj) {
+        var meta = [pj.period, pj.location].filter(Boolean).map(esc).join(" · ");
+        return "<article class='seo-card' id='" + esc(pj.id || "") + "'>" +
+          "<header class='seo-top'><p class='case-meta'><span>" + meta + "</span><span>" + esc(pj.role || "") + "</span></p>" +
+          "<h3>" + esc(pj.name) + "</h3><p class='case-org'>" + esc(pj.org || "") + "</p>" +
+          (pj.summary ? "<p class='case-context'>" + esc(pj.summary) + "</p>" : "") + "</header>" +
+          "<div class='seo-groups'>" + (pj.groups || []).filter(function (g) { return has(g.items); }).map(function (g) {
+            return "<section class='seo-group'><h4>" + esc(g.label) + "</h4><ul class='checks'>" +
+              g.items.map(function (it) { return "<li>" + esc(it) + "</li>"; }).join("") + "</ul></section>";
+          }).join("") + "</div>" +
+          (has(pj.stats) ? "<div class='seo-results'><h4>Results</h4><dl class='seo-stats'>" + pj.stats.map(function (st) {
+            return "<div><dt>" + esc(st.value) + "</dt><dd>" + esc(st.label) + "</dd></div>";
+          }).join("") + "</dl>" + (pj.statsNote ? "<p class='seo-note'>" + esc(pj.statsNote) + "</p>" : "") + "</div>" : "") +
+          (pj.opportunities && has(pj.opportunities.items) ? "<div class='seo-opps'><h4>" + esc(pj.opportunities.label || "Opportunities") + "</h4><ol class='opps'>" +
+            pj.opportunities.items.map(function (it) { return "<li>" + esc(it) + "</li>"; }).join("") + "</ol></div>" : "") +
+          (has(pj.tools) ? "<div class='seo-tools'>" + tags(pj.tools) + "</div>" : "") +
+        "</article>";
+      }).join("") + "</div></div>";
   })();
 
   /* ---------- lead journey ---------- */
