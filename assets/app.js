@@ -121,11 +121,11 @@
     if (showResume) ctas += "<a class='btn' href='" + esc(P.resume) + "' download>Download résumé</a>";
     if (P.linkedin) ctas += "<a class='btn' href='" + esc(P.linkedin) + "' target='_blank' rel='noopener'>LinkedIn</a>";
     var trace = has(H.trace) ? "<p class='trace' aria-label='How I measure a lead'>" + H.trace.map(function (t, i) {
-      return "<span" + (i === H.trace.length - 1 ? " class='end'" : "") + ">" + esc(t) + "</span>";
+      return "<span style='--i:" + i + "'" + (i === H.trace.length - 1 ? " class='end'" : "") + ">" + esc(t) + "</span>";
     }).join("<i aria-hidden='true'>›</i>") + "</p>" : "";
     var asOf = C.dashboard && C.dashboard.asOf ? "<p class='ledger-note'>" + esc(C.dashboard.asOf) + ". Lead figures from Salesforce.</p>" : "";
     var stats = has(H.stats) ? "<div class='ledger-wrap'><dl class='ledger'>" + H.stats.map(function (s) {
-      return "<div><dt>" + esc(s.label) + "</dt><dd>" + esc(s.value) + "</dd>" + (s.note ? "<p>" + esc(s.note) + "</p>" : "") + "</div>";
+      return "<div><dt>" + esc(s.label) + "</dt><dd data-count>" + esc(s.value) + "</dd>" + (s.note ? "<p>" + esc(s.note) + "</p>" : "") + "</div>";
     }).join("") + "</dl>" + asOf + "</div>" : "";
     $("#top").innerHTML =
       "<div class='wrap hero-grid'>" +
@@ -187,9 +187,9 @@
           "<p class='summary'>" + esc(r.summary) + "</p>" +
           list(r.highlights, "bullets strong") +
           (has(r.responsibilities) || has(r.tools) || related ?
-            "<button class='expander' type='button' aria-expanded='" + (i === 0 ? "true" : "false") + "' aria-controls='" + id + "'>" +
+            "<button class='expander' type='button' aria-expanded='false' aria-controls='" + id + "'>" +
               "<span class='when-closed'>Show responsibilities</span><span class='when-open'>Hide responsibilities</span></button>" +
-            "<div class='more' id='" + id + "'" + (i === 0 ? "" : " hidden") + ">" +
+            "<div class='more' id='" + id + "' hidden>" +
               list(r.responsibilities) + tags(r.tools) + related +
             "</div>" : "") +
         "</div></li>";
@@ -219,28 +219,48 @@
         var n = C.caseStudies.filter(function (c) { return (c.categories || []).indexOf(cat.id) > -1; }).length;
         return "<button type='button' class='chip' aria-pressed='false' data-cat='" + esc(cat.id) + "'>" + esc(cat.label) + " <span>" + n + "</span></button>";
       }).join("") + "</div>";
+    // Small line icons, one per category (the first category on a case picks its icon).
+    var ICON = {
+      paid: "<circle cx='11' cy='11' r='6'/><path d='M20 20l-4.5-4.5'/>",
+      social: "<path d='M4 5h16v11H9l-5 4z'/>",
+      tracking: "<circle cx='12' cy='12' r='7'/><circle cx='12' cy='12' r='2.5'/><path d='M12 2v3M12 19v3M2 12h3M19 12h3'/>",
+      crm: "<path d='M3 5h18l-7 8v6l-4 2v-8z'/>",
+      web: "<rect x='3' y='4' width='18' height='16' rx='2'/><path d='M3 9h18M7 6.5h.01M10 6.5h.01'/>",
+      ai: "<path d='M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z'/><path d='M19 16l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z'/>"
+    };
+    function icon(c) {
+      var k = (c.categories || [])[0], d = ICON[k];
+      return d ? "<span class='case-icon' aria-hidden='true'><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'>" + d + "</svg></span>" : "";
+    }
+    function brief(b) {
+      if (!b) return "";
+      var rows = [["Problem", b.problem], ["What I did", b.did], ["Result", b.result]].filter(function (r) { return r[1]; });
+      return "<dl class='brief'>" + rows.map(function (r) { return "<div><dt>" + r[0] + "</dt><dd>" + esc(r[1]) + "</dd></div>"; }).join("") + "</dl>";
+    }
     var cards = "<div class='cases'>" + C.caseStudies.map(function (c) {
       var rid = "case-body-" + esc(c.id);
       return "<article class='case' id='case-" + esc(c.id) + "' data-cats='" + esc((c.categories || []).join(" ")) + "'>" +
         "<div class='case-top'>" +
           "<p class='case-meta'><span>" + esc(c.period) + "</span>" + (c.role ? "<span class='role-tag'>" + esc(c.role) + "</span>" : "") + "</p>" +
-          "<h3>" + esc(c.title) + "</h3>" +
+          "<div class='case-head'>" + icon(c) + "<h3>" + esc(c.title) + "</h3></div>" +
           "<p class='case-org'>" + esc(c.org) + (c.industry ? " · " + esc(c.industry) : "") + "</p>" +
-          "<p class='case-context'>" + esc(c.context) + "</p>" +
+          (c.metric ? "<p class='case-metric'><strong data-count>" + esc(c.metric.value) + "</strong><span>" + esc(c.metric.label) + "</span></p>" : "") +
+          (c.brief ? brief(c.brief) : "<p class='case-context'>" + esc(c.context) + "</p>") +
           "<p class='case-cats'>" + (c.categories || []).map(function (k) { return catLabel[k] ? "<span>" + esc(catLabel[k]) + "</span>" : ""; }).join("") + "</p>" +
-          "<button class='expander' type='button' aria-expanded='false' aria-controls='" + rid + "'><span class='when-closed'>Read case study</span><span class='when-open'>Close case study</span></button>" +
+          "<button class='expander' type='button' aria-expanded='false' aria-controls='" + rid + "'><span class='when-closed'>Read the full case</span><span class='when-open'>Close case study</span></button>" +
         "</div>" +
         "<div class='case-body' id='" + rid + "' hidden>" +
+          (c.brief && c.context ? step("Context", "<p>" + esc(c.context) + "</p>") : "") +
           step("Objective", "<p>" + esc(c.objective) + "</p>") +
           step("My contribution", "<p>" + esc(c.contribution) + "</p>") +
           step("Implementation", list(c.implementation)) +
-          step("Results", list(c.results, "bullets results")) +
+          step("Results", list(c.results, "bullets results") + (c.resultsNote ? "<p class='case-note'>" + esc(c.resultsNote) + "</p>" : "")) +
           step("Key takeaway", "<p class='takeaway'>" + esc(c.takeaway) + "</p>") +
           tags(c.tools) +
         "</div></article>";
     }).join("") + "</div>";
     function step(label, body) { return body ? "<section class='case-step'><h4>" + esc(label) + "</h4>" + body + "</section>" : ""; }
-    $("#work").innerHTML = "<div class='wrap'>" + head("Case studies", "Selected work", "Each case follows the same order: context, objective, my part, what I did, results, and the takeaway. Figures are aggregates for the period stated.") + chips + cards + "</div>";
+    $("#work").innerHTML = "<div class='wrap'>" + head("Case studies", "Selected work", "The result first. Open a case for the full story: context, my part, what I did, and the takeaway.") + chips + cards + "</div>";
 
     $all("#work .chip").forEach(function (chip) {
       chip.addEventListener("click", function () {
@@ -661,6 +681,60 @@
   /* ---------- footer ---------- */
   $("#footer").innerHTML = "<div class='wrap foot'><p>© " + esc((C.meta && C.meta.year) || "") + " " + esc(P.name) + ". Last updated " + esc((C.meta && C.meta.lastUpdated) || "") + ".</p>" +
     "<p>Figures are aggregates for the dates shown. No client or customer data appears on this site.</p></div>";
+
+  /* ---------- motion: count-ups, scroll reveal, timeline fill ----------
+     Everything here is decoration. Content is fully visible without it,
+     and it is skipped for visitors who ask for reduced motion. */
+  (function () {
+    var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce || !("IntersectionObserver" in window)) return;
+    document.documentElement.classList.add("motion");
+
+    // Count a figure up from zero, keeping its prefix and suffix ("₱150M+", "57,000+", "50%+").
+    function countUp(el) {
+      var txt = el.textContent, m = txt.match(/^(\D*)([\d,]*\.?\d+)(.*)$/);
+      if (!m) return;
+      var target = parseFloat(m[2].replace(/,/g, "")), dec = (m[2].split(".")[1] || "").length, comma = m[2].indexOf(",") > -1;
+      var t0 = null, dur = 1100;
+      function fmt(n) { return comma ? n.toLocaleString("en-US", { minimumFractionDigits: dec, maximumFractionDigits: dec }) : n.toFixed(dec); }
+      function step(t) {
+        if (!t0) t0 = t;
+        var p = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - p, 3);
+        el.textContent = m[1] + fmt(target * e) + m[3];
+        if (p < 1) requestAnimationFrame(step); else el.textContent = txt;
+      }
+      requestAnimationFrame(step);
+    }
+    var countIO = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) { if (en.isIntersecting) { countUp(en.target); countIO.unobserve(en.target); } });
+    }, { threshold: 0.6 });
+    $all("[data-count]").forEach(function (el) { countIO.observe(el); });
+
+    // Fade sections in as they scroll into view.
+    var targets = $all(".sec-head, .ledger-wrap, .prose, .about-side, .role, .case, .chart-card, .dash-controls, .skill-group, .certs li, .c-row, .chips");
+    targets.forEach(function (el) { el.classList.add("reveal"); });
+    var revealIO = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add("in"); revealIO.unobserve(en.target); } });
+    }, { rootMargin: "0px 0px -6% 0px", threshold: 0.05 });
+    targets.forEach(function (el) { revealIO.observe(el); });
+
+    // Fill the experience timeline as the reader scrolls through it.
+    var tl = $(".timeline");
+    if (tl) {
+      tl.classList.add("rail");
+      var tick = false;
+      var fill = function () {
+        tick = false;
+        var r = tl.getBoundingClientRect(), mid = innerHeight * 0.6;
+        var f = Math.max(0, Math.min(1, (mid - r.top) / r.height));
+        tl.style.setProperty("--fill", f.toFixed(3));
+        $all(".role", tl).forEach(function (li) { li.classList.toggle("passed", li.getBoundingClientRect().top < mid); });
+      };
+      addEventListener("scroll", function () { if (!tick) { tick = true; requestAnimationFrame(fill); } }, { passive: true });
+      addEventListener("resize", fill);
+      fill();
+    }
+  })();
 
   /* ---------- deep links (#case-id) ---------- */
   function fromHash() {

@@ -92,17 +92,17 @@ p { margin: 0; }
 .btn.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
 .btn.primary:hover { filter: brightness(1.08); }
 .btn.small { padding: 7px 12px; font-size: .8125rem; }
-.ledger { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; margin: 0; border-top: 2px solid var(--ink); }
+.ledger { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0; margin: 0; border-top: 2px solid var(--ink); }
 .ledger > div { padding: 18px 20px 4px 0; display: flex; flex-direction: column; gap: 6px; }
 .ledger > div + div { padding-left: 20px; border-left: 1px solid var(--rule); }
-.ledger dd { order: -1; margin: 0; font: 700 clamp(2rem, 1.4rem + 2vw, 3rem)/1 var(--f-display); letter-spacing: -.03em; font-variant-numeric: tabular-nums; }
+.ledger dd { order: -1; margin: 0; font: 700 clamp(1.75rem, 1.2rem + 1.3vw, 2.25rem)/1 var(--f-display); white-space: nowrap; letter-spacing: -.03em; font-variant-numeric: tabular-nums; }
 .ledger dt { font-size: .9rem; line-height: 1.4; color: var(--ink-2); }
 .ledger p { font: 400 .75rem/1.4 var(--f-mono); color: var(--muted); }
 .ledger-wrap { display: grid; gap: 12px; }
 .ledger-note { font: 400 .75rem/1.4 var(--f-mono); color: var(--muted); padding-top: 8px; border-top: 1px solid var(--rule); }
-@media (max-width: 820px) {
+@media (max-width: 1000px) {
   .ledger { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .ledger > div:nth-child(3) { padding-left: 0; border-left: 0; }
+  .ledger > div:nth-child(odd) { padding-left: 0; border-left: 0; }
   .ledger > div:nth-child(n+3) { border-top: 1px solid var(--rule); }
 }
 
@@ -340,3 +340,46 @@ dialog .close { float: right; margin-bottom: 10px; }
 .opps li::marker { font: 500 .8125rem var(--f-mono); color: var(--accent); }
 @media (max-width: 900px) { .seo-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 580px) { .seo-results, .seo-opps { margin: 0 18px 18px; } }
+.case-note { margin-top: 10px; font-size: .8125rem; line-height: 1.5; color: var(--muted); }
+
+/* ---------- Result-first case cards ---------- */
+.case-head { display: flex; align-items: flex-start; gap: 12px; }
+.case-icon { flex: none; width: 36px; height: 36px; display: grid; place-items: center; border-radius: 9px; background: var(--accent-soft); color: var(--accent); margin-top: 1px; }
+.case-icon svg { width: 20px; height: 20px; }
+.case-metric { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 12px; padding: 14px 0 12px; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); margin-top: 4px; }
+.case-metric strong { font: 700 clamp(1.875rem, 1.4rem + 1.4vw, 2.5rem)/1 var(--f-display); letter-spacing: -.03em; color: var(--ink); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.case-metric span { font-size: .875rem; color: var(--ink-2); max-width: 22rem; }
+.brief { margin: 2px 0 0; display: grid; gap: 8px; }
+.brief div { display: grid; grid-template-columns: 92px minmax(0, 1fr); gap: 12px; align-items: baseline; }
+.brief dt { font: 500 .6875rem/1.4 var(--f-mono); text-transform: uppercase; letter-spacing: .05em; color: var(--muted); }
+.brief dd { margin: 0; font-size: .9375rem; color: var(--ink-2); line-height: 1.45; }
+.brief div:last-child dd { color: var(--ink); font-weight: 500; }
+@media (max-width: 420px) { .brief div { grid-template-columns: 1fr; gap: 2px; } }
+
+/* ---------- Motion (only when JS adds .motion and the visitor allows motion) ---------- */
+.motion .reveal { opacity: 0; transform: translateY(14px); transition: opacity .6s ease, transform .6s cubic-bezier(.2,.7,.2,1); }
+.motion .reveal.in { opacity: 1; transform: none; }
+.motion .cases .case.reveal:nth-child(2n) { transition-delay: .08s; }
+.motion .skills .skill-group.reveal:nth-child(3n+2) { transition-delay: .06s; }
+.motion .skills .skill-group.reveal:nth-child(3n) { transition-delay: .12s; }
+
+/* The lead path under the intro lights up one step at a time, on a loop. */
+@keyframes step-glow {
+  0%, 12% { border-color: var(--accent); color: var(--ink); box-shadow: 0 0 0 3px var(--accent-soft); }
+  22%, 100% { border-color: var(--rule-strong); color: var(--muted); box-shadow: none; }
+}
+@keyframes step-glow-end {
+  0%, 12% { box-shadow: 0 0 0 3px rgba(76,195,158,.25); background: rgba(76,195,158,.12); }
+  22%, 100% { box-shadow: none; background: var(--surface); }
+}
+.motion .trace span { animation: step-glow 6s infinite; animation-delay: calc(var(--i) * .9s); }
+.motion .trace span.end { animation-name: step-glow-end; }
+
+/* Experience timeline rail that fills while scrolling. */
+.timeline.rail { position: relative; padding-left: 26px; }
+.timeline.rail::before, .timeline.rail::after { content: ""; position: absolute; left: 6px; top: 34px; width: 2px; border-radius: 2px; }
+.timeline.rail::before { bottom: 34px; background: var(--rule); }
+.timeline.rail::after { height: calc((100% - 68px) * var(--fill, 0)); background: linear-gradient(var(--verified), var(--accent)); transition: height .15s linear; }
+.timeline.rail .role::before { content: ""; position: absolute; left: -26px; top: 33px; width: 14px; height: 14px; border-radius: 50%; background: var(--bg); border: 2px solid var(--rule-strong); transition: border-color .3s, background .3s; z-index: 1; }
+.timeline.rail .role.passed::before { border-color: var(--verified); background: var(--verified); }
+.timeline.rail .role.current .when span:first-child::before { display: none; }

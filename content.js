@@ -36,6 +36,7 @@ window.PORTFOLIO = {
      ===================================================================== */
   numbers: {
     since:          "Mar 16, 2026",   // start of the PRIME / GreatWork figures
+    period:         "March to October 2026", // period shown under the headline figures
     lastUpdated:    "October 2026",   // shown in the footer
 
     campaignsTotal: "60+",       // all Google Ads campaigns, every account
@@ -45,6 +46,7 @@ window.PORTFOLIO = {
     primeLeads:     "500+",      // Salesforce, Google Ads leads
     gwLeads:        "400+",      // Salesforce, Google Ads + Website leads
     primeQualRate:  "50%+",
+    leadValue:      "₱150M+",    // estimated professional fees from reconciled PF receivables, not closed deals
     gwQualRate:     "31%+",
 
     primeClicks:    "33,000+",
@@ -55,36 +57,6 @@ window.PORTFOLIO = {
     gwCtr:          "8.3%"
   },
 
-  /* =====================================================================
-     MONTHLY DATA · feeds the "by month" chart on Results.
-     To add a month: add it to the end of "months", then add one number
-     to the end of every row below it (use null if there is no figure).
-     Every row must have the same number of entries as "months".
-     ===================================================================== */
-  monthly: {
-    months:       ["2026-03", "2026-04", "2026-05", "2026-06", "2026-07", "2026-08", "2026-09", "2026-10"],
-    note:         "Monthly figures are actual counts. March covers March 16 to 31 and October covers October 1 to 5. PRIME has no Google Ads-tagged leads before April, when click-ID capture started. GreatWork excludes July 11 to 13, 2026.",
-    leads: {
-      prime:      [null,  7,    34,   67,   76,   123,  123,  10],
-      greatwork:  [1,     33,   54,   89,   103,  28,   64,   6]
-    },
-    qualified: {
-      prime:      [null,  5,    12,   39,   46,   57,   61,   3],
-      greatwork:  [null,  14,   11,   29,   17,   13,   34,   0]
-    },
-    clicks: {
-      prime:      [2670,  5669,  5560,  2404,  4348,  7049,  4961,  724],
-      greatwork:  [2086,  5596,  5408,  2935,  2271,  322,   1222,  185]
-    },
-    impressions: {
-      prime:      [24092, 53891, 56355, 26939, 56920, 65282, 45801, 7669],
-      greatwork:  [20356, 54591, 63215, 40995, 37205, 4977,  17433, 2332]
-    },
-    ctr: {
-      prime:      [11.1,  10.5,  9.9,   8.9,   7.6,   10.8,  10.8,  9.4],
-      greatwork:  [10.2,  10.3,  8.6,   7.2,   6.1,   6.5,   7.0,   7.9]
-    }
-  },
 
   /* ---------- Identity & contact ---------- */
   person: {
@@ -114,8 +86,8 @@ window.PORTFOLIO = {
   /* ---------- Home ---------- */
   hero: {
     // One-sentence positioning statement, reused on the resume and LinkedIn.
-    positioning: "SEM Specialist who plans, builds, and tracks Google Ads and Meta Ads campaigns for lead generation, measured by CRM-verified leads rather than ad-platform conversions alone.",
-    lede: "I plan, build, and track paid campaigns on Google Ads and Meta Ads for businesses in commercial real estate, flexible workspace, automotive services, and logistics. I judge the work by the leads that get confirmed and qualified in the CRM, not only by what the ad platform reports.",
+    positioning: "SEM Specialist who plans, builds, tracks, and optimizes Google Ads and Meta Ads campaigns for lead generation, measured by CRM-verified leads rather than ad-platform conversions alone.",
+    lede: "I plan, build, track, and optimize paid campaigns on Google Ads and Meta Ads for businesses across real estate, automotive, and logistics. I judge the work by the leads that get confirmed and qualified in the CRM, not only by what the ad platform reports.",
     // The small trace line under the intro. Each item is one step.
     trace: ["search query", "ad click", "form submit", "Salesforce lead", "qualified"],
     // Headline figures. Only cleared figures belong here.
@@ -123,24 +95,25 @@ window.PORTFOLIO = {
       { value: "{{campaignsTotal}}", label: "Google Ads campaigns managed across multiple accounts", note: "PRIME Philippines, GreatWork, and freelance client work" },
       { value: "{{primeLeads}}", label: "Google Ads leads confirmed in Salesforce, PRIME Philippines", note: "Counted in the CRM, not the ad platform" },
       { value: "{{gwLeads}}", label: "Google Ads and website leads in Salesforce, GreatWork", note: "Counted in the CRM, not the ad platform" },
-      { value: "{{primeQualRate}}", label: "of PRIME's Google Ads leads reached qualified status", note: "Qualified in Salesforce by sales" }
+      { value: "{{primeQualRate}}", label: "of PRIME's Google Ads leads reached qualified status", note: "Qualified in Salesforce by sales" },
+      { value: "{{leadValue}}", label: "estimated value of qualified leads", note: "Estimated professional fees, not closed deals or revenue" }
     ]
   },
 
   /* ---------- About ---------- */
   about: {
     paragraphs: [
-      "I manage Google Ads Search and Performance Max across two accounts under PRIME Philippines Group: PRIME Philippines, a commercial real estate consultancy covering office, retail, industrial, warehouse, lot, and investment property, and GreatWork, its flexible workspace brand serving both business and individual clients. Together with my freelance client work, I have managed {{campaignsTotal}} Google Ads campaigns.",
-      "The work covers the full search lifecycle: campaign builds, keyword research, search term and negative keyword audits, asset creation, bid and budget management, and conversion tracking through Google Ads, Google Tag Manager, and GA4. I also build the WordPress landing pages that PRIME's campaigns send traffic to, including on-page SEO, so paid clicks land on a page built to convert.",
-      "What I care about most is measurement. A Google Ads conversion is a form submit; a lead is only real once it shows up in Salesforce and moves through qualification. I built a 15-point audit and reporting routine that checks both sides on a weekly, monthly, and periodic cadence, and I use Claude connected read-only to Google Ads and Salesforce to automate the reporting.",
-      "Before PRIME I spent six years in the UAE, first running digital marketing and Meta Ads for a Dubai cargo company, then in digital catalog and content operations at InstaShop in Abu Dhabi, where I also took on a freelance website and Google Ads project for an auto repair business."
+      "I manage Google Ads Search and Performance Max for two brands under PRIME Philippines Group: PRIME Philippines, a commercial real estate consultancy, and GreatWork, its flexible workspace brand. Including freelance work, I have managed {{campaignsTotal}} Google Ads campaigns.",
+      "I cover the full search lifecycle, from keyword research and campaign builds to search term audits, bidding, and conversion tracking in Google Ads, GTM, and GA4. I also build the WordPress landing pages the campaigns send traffic to.",
+      "I measure the work in Salesforce, not only in the ad platform: a lead counts once it reaches the CRM and moves through qualification. A 15-point audit checks both sides, and I use AI, including Claude connected read-only to Google Ads and Salesforce, for reporting, analysis, ad copy, campaign builds, troubleshooting, and images.",
+      "Before PRIME I spent six years in the UAE: Meta Ads for a Dubai cargo company, catalog and content operations at InstaShop, and a freelance website, SEO, and Google Ads project for an auto repair shop."
     ],
     focusAreas: [
       { label: "Paid search", text: "Google Ads Search, Performance Max, and Display for B2B and B2C lead generation." },
       { label: "Paid social", text: "Meta Ads campaign creation, launch, and conversion tracking setup." },
       { label: "Measurement", text: "Conversion tracking in GTM and GA4, checked against Salesforce lead records." },
       { label: "Landing pages", text: "WordPress pages and on-page SEO matched to ad intent." },
-      { label: "Reporting", text: "A documented audit cadence and AI-assisted, read-only reporting workflows." }
+      { label: "Reporting & AI", text: "A 15-point audit cadence, plus AI across ads, reporting, and analysis." }
     ],
     lookingFor: "Paid Ads and SEM roles at teams that judge ad spend by CRM-verified outcomes, not platform metrics alone."
   },
@@ -194,6 +167,29 @@ window.PORTFOLIO = {
         "Maintained image and description quality across listings."
       ],
       tools: ["Marketplace CMS", "Catalog management", "Product photography", "Team training"],
+      projects: []
+    },
+    {
+      id: "mk",
+      role: "Digital Marketer (Freelance)",
+      org: "MK Car Repair",
+      orgDetail: "Auto repair shop, freelance client",
+      location: "Al Ain, UAE",
+      start: "Nov 2024",
+      end: "May 2025",
+      summary: "End-to-end digital marketing for a local auto repair shop, taken on alongside my role at InstaShop: the website, local SEO, tracking, and Google Ads.",
+      highlights: [
+        "Built the shop's WordPress website and ran its Google Ads Search campaign: 57,000+ impressions and 1,000+ clicks on a very limited daily budget.",
+        "The pages I built rank #1 when people search the shop's name and have earned 11,000+ Google Search impressions (Search Console, June 2025 to October 2026)."
+      ],
+      responsibilities: [
+        "Researched what drivers in Al Ain search for and wrote three long-form blog posts around those searches.",
+        "Handled on-page and local SEO, including the shop's Google Business Profile.",
+        "Submitted the sitemap and managed indexing in Google Search Console.",
+        "Installed Google Tag Manager and GA4 to track site traffic.",
+        "Wrote the ad copy, built the assets, managed the budget, and reviewed search terms for the Google Ads campaign."
+      ],
+      tools: ["WordPress", "Google Ads Search", "Google Search Console", "Google Business Profile", "Google Tag Manager", "GA4"],
       projects: ["mk-car-repair"]
     },
     {
@@ -243,8 +239,9 @@ window.PORTFOLIO = {
   // "categories" must match an id in caseCategories.
   caseCategories: [
     { id: "paid", label: "Google Ads & paid media" },
-    { id: "crm", label: "CRM & reporting" },
+    { id: "social", label: "Meta Ads & social" },
     { id: "tracking", label: "Tracking & analytics" },
+    { id: "crm", label: "CRM & reporting" },
     { id: "web", label: "Website & SEO" },
     { id: "ai", label: "AI workflows" }
   ],
@@ -252,6 +249,9 @@ window.PORTFOLIO = {
   caseStudies: [
     {
       id: "two-accounts",
+      // Card front: the headline figure and a three-line summary.
+      metric: { value: "{{campaignsTotal}}", label: "campaigns built and managed across both accounts" },
+      brief: { problem: "Two brands with different buyers, keywords, and conversion goals.", did: "Split campaigns by property segment, location, and conversion type.", result: "{{primeLeads}} PRIME and {{gwLeads}} GreatWork leads confirmed in Salesforce." },
       title: "Running paid search for two B2B brands at once",
       org: "PRIME Philippines and GreatWork",
       industry: "Commercial real estate · Flexible workspace",
@@ -277,6 +277,9 @@ window.PORTFOLIO = {
     },
     {
       id: "crm-measurement",
+      // Card front: the headline figure and a three-line summary.
+      metric: { value: "{{primeQualRate}}", label: "of PRIME's Google Ads leads reached qualified status" },
+      brief: { problem: "Google Ads conversions and Salesforce leads rarely match.", did: "Built a 15-point audit that checks ad results against CRM records.", result: "Lead counts come from the CRM, and qualified status flows back to Google Ads." },
       title: "Measuring leads in Salesforce, not just in Google Ads",
       org: "PRIME Philippines and GreatWork",
       industry: "Commercial real estate · Flexible workspace",
@@ -302,11 +305,14 @@ window.PORTFOLIO = {
     },
     {
       id: "tracking",
+      // Card front: the headline figure and a three-line summary.
+      metric: { value: "GTM + GA4", label: "conversion tracking set up and fixed with developers" },
+      brief: { problem: "Several conversion types on a website shared with IT.", did: "Separate conversion actions, Enhanced Conversions, and tracking checks in every audit.", result: "Clean lead-form and purchase tracking for GreatWork; Meta Ads tracking restored for PRIME." },
       title: "Conversion tracking for lead forms and purchases",
       org: "PRIME Philippines and GreatWork",
       industry: "Commercial real estate · Flexible workspace",
       period: "Mar 2026 – Present",
-      categories: ["tracking"],
+      categories: ["tracking", "social"],
       role: "Implemented with developers",
       context: "Two brands, several conversion types, and a website stack shared with IT. Missing or duplicated conversion actions feed bad signals into automated bidding.",
       objective: "Make every campaign report the right conversion, once, and keep it working as pages change.",
@@ -326,79 +332,106 @@ window.PORTFOLIO = {
     },
     {
       id: "landing-pages",
-      title: "Landing pages that match the ad",
+      // Card front: the headline figure and a three-line summary.
+      metric: { value: "SEO + Ads", label: "every page built to rank and to match its campaign" },
+      brief: { problem: "Specific property searches landing on generic pages.", did: "One page per property type and location, keyword-led from title tag to URL.", result: "Pages that serve both the paid click and the organic search." },
+      title: "Service and location landing pages",
       org: "PRIME Philippines and GreatWork",
-      industry: "Commercial real estate",
+      industry: "Commercial real estate and flexible workspace",
       period: "Mar 2026 – Present",
-      categories: ["web"],
+      categories: ["web", "paid"],
       role: "Built",
-      context: "Property searches are specific: a location, a property type, a size. A generic page loses the visitor that a specific ad just earned.",
-      objective: "Send paid traffic to pages that answer the search and make inquiring easy.",
+      context: "Property searches are specific: a property type, a location, a size. A generic page loses the visitor that a specific ad just earned, and it won't rank for the search either.",
+      objective: "Build pages that match the Google Ads campaigns sending traffic to them and can also rank on their own in organic search.",
       contribution: "I build and optimize the WordPress landing pages for PRIME Philippines and GreatWork campaigns and work with IT and developers on site bugs.",
       implementation: [
-        "Page copy and layout aligned to each campaign's keywords and ad copy.",
-        "On-page SEO on every page: focus keyword, meta description, URL slug, and image alt text, descriptions, and captions.",
-        "Generative AI imagery for property and workspace pages."
+        "One page per property type and location, such as office space in Cebu, commercial lots in Cavite, and warehouses in Quezon City.",
+        "Title tag, H1, meta description, and URL slug built on the same \"[property type] for lease in [location]\" keyword.",
+        "Supporting sections that answer local intent, such as why businesses choose that location, plus image alt text, descriptions, and captions.",
+        "Links from each page to the matching property listings, and an inquiry form on the page.",
+        "Page copy aligned to each campaign's keywords and ad copy, with generative AI imagery for property and workspace pages."
       ],
       results: [
-        "Landing pages built and maintained for PRIME's Google Ads campaigns."
+        "Service and location landing pages built and maintained for PRIME's Google Ads campaigns, each optimized for organic search."
       ],
-      takeaway: "The ad and the page are one experience. Most of the gain comes from matching them closely.",
+      takeaway: "The ad and the page are one experience. A page built around one service in one location serves both the paid click and the organic search.",
       tools: ["WordPress", "On-page SEO", "Generative AI imagery"]
     },
     {
       id: "ai-reporting",
-      title: "AI-assisted reporting on read-only data",
+      // Card front: the headline figure and a three-line summary.
+      metric: { value: "Read-only", label: "AI connections to Google Ads and Salesforce" },
+      brief: { problem: "Weekly reports, fixes, and visuals take hours by hand.", did: "Claude on read-only data, plus AI for ad copy, campaign builds, troubleshooting, and images.", result: "Faster, checkable work with no write access to either system." },
+      title: "AI across campaigns, reporting, troubleshooting, and images",
       org: "PRIME Philippines and GreatWork",
       industry: "Marketing operations",
       period: "2026",
       categories: ["ai", "crm"],
       role: "Built",
-      context: "Recurring reports pull from Google Ads and Salesforce every week. Doing it by hand is slow and easy to get wrong.",
-      objective: "Speed up routine reporting and analysis without giving any tool write access to company systems.",
-      contribution: "I connected Claude to a Google Ads MCP integration and a Salesforce connector, both strictly read-only, and use AI tools across analysis, research, and content work.",
+      context: "Recurring reports pull from Google Ads and Salesforce every week, and campaigns need a steady flow of analysis, fixes, and visuals. Doing all of it by hand is slow and easy to get wrong.",
+      objective: "Work faster across campaign builds, reporting, analysis, troubleshooting, and creative, without giving any tool write access to company systems.",
+      contribution: "I connected Claude to a Google Ads MCP integration and a Salesforce connector, both strictly read-only, and use AI tools every day across ad copy, campaign builds, reporting, data analysis, troubleshooting, and image work.",
       implementation: [
-        "Claude with read-only Google Ads and Salesforce connections for recurring reports and reconciliation.",
+        "Claude with read-only Google Ads and Salesforce connections for recurring reports, reconciliation, and data analysis.",
+        "AI to draft ad copy and structure new campaign builds, which I then review and refine.",
+        "AI-assisted troubleshooting of conversion tracking and website issues.",
         "ChatGPT for search term review, competitor research, and ad copy analysis.",
-        "Generative AI for landing page and social content imagery."
+        "Generative AI to create and enhance images for landing pages and social content."
       ],
       results: [
-        "Reporting workflows automated on read-only connections, with no write access to either system."
+        "Reporting workflows automated on read-only connections, with no write access to either system.",
+        "AI built into day-to-day campaign, analysis, troubleshooting, and creative work, not only reporting."
       ],
-      takeaway: "Read-only access is the right default. The value is in faster, checkable analysis, not in letting a tool change the account.",
-      tools: ["Claude", "Google Ads MCP (read-only)", "Salesforce connector (read-only)", "ChatGPT"]
+      takeaway: "Read-only access is the right default. The value is in faster, checkable work, not in letting a tool change the account.",
+      tools: ["Claude", "Google Ads MCP (read-only)", "Salesforce connector (read-only)", "ChatGPT", "Generative AI imagery"]
     },
     {
       id: "mk-car-repair",
-      title: "Website and Google Ads for an auto repair shop",
+      // Card front: the headline figure and a three-line summary.
+      metric: { value: "57,000+", label: "ad impressions on a very limited daily budget" },
+      brief: { problem: "A local shop that needed a website and a way to be found in search.", did: "Built the site, local SEO, tracking, and a Google Ads Search campaign.", result: "#1 for the shop's name, and on page 1 of Google by March 2026." },
+      title: "Website, local SEO, and Google Ads for an auto repair shop",
       org: "MK Car Repair (freelance client)",
-      industry: "Automotive services",
+      industry: "Automotive services · Al Ain, UAE",
       period: "Nov 2024 – May 2025",
       categories: ["web", "paid"],
       role: "Freelance, sole marketer",
-      context: "A local automotive service business needed a website and a way to reach people searching for repairs.",
+      context: "A local auto repair shop in Al Ain needed a website and a way to reach people searching for repairs, both through Google Ads and in organic search.",
       objective: "Launch a site that could rank and convert, and bring in search traffic from day one.",
-      contribution: "I handled the project end to end as a freelancer alongside my role at InstaShop.",
+      contribution: "I handled the project end to end as a freelancer alongside my role at InstaShop: the site, the SEO, the tracking, and the ads.",
       implementation: [
-        "Designed and built a responsive website for the business.",
-        "Keyword research, three long-form blog posts, and on-page SEO for local search in Al Ain.",
-        "Submitted the sitemap and requested indexing in Google Search Console, and optimized the shop's Google Business Profile.",
+        "Designed and built a responsive WordPress website.",
+        "Used keyword research tools to find what drivers in Al Ain search for, and chose page targets and blog topics from that data.",
+        "Wrote and published three long-form blog posts, each built around a real search question, with H2 and H3 headings that answer it directly.",
+        "Local-intent page titles and meta descriptions, URL slugs, image alt text, and internal links from the posts to the Services page.",
+        "Submitted the XML sitemap and requested indexing in Google Search Console, checked crawl and index status, and compressed images to keep pages fast.",
+        "Optimized the shop's Google Business Profile for local and Maps search.",
         "Installed Google Tag Manager and GA4 to track site traffic.",
-        "Built and managed a Google Ads Search campaign: copy, assets, and budget."
+        "Built and managed a Google Ads Search campaign on a very limited daily budget: copy, assets, and budget.",
+        "Reviewed search term reports to add new keywords and exclude irrelevant searches, across English and Arabic queries."
       ],
       results: [
-        "Website launched, crawled, and indexed, with a Google Ads Search campaign built and managed for the client."
+        "57,000+ ad impressions and 1,000+ clicks from a single Search campaign on a very limited daily budget.",
+        "Visitors from the ads engaged with the site at 43%, against 26% for direct traffic.",
+        "Ranks #1 when people search the shop's name.",
+        "One blog post, about repair times, has earned 4,600+ Google impressions.",
+        "Moved from page 3 of Google results in mid-2025 to page 1 by March 2026, with an average position of 5.7.",
+        "11,000+ Google Search impressions in total."
       ],
+      resultsNote: "Ad figures are from Google Ads and GA4; the campaign ran only during my engagement, November 2024 to May 2025. Search figures are from Google Search Console, June 11, 2025 to October 9, 2026. Search Console keeps only 16 months of data, so they start after my work on the site ended in May 2025. I haven't worked on the site since, so they show how the pages I built kept performing on their own.",
       takeaway: "Owning the site, the SEO, and the ads together shows quickly where each channel helps the other.",
-      tools: ["Website build", "On-page SEO", "Google Search Console", "Google Business Profile", "Google Ads Search"]
+      tools: ["WordPress", "Keyword research tools", "On-page SEO", "Google Search Console", "Google Business Profile", "Google Tag Manager", "GA4", "Google Ads Search"]
     },
     {
       id: "meta-ads-cargo",
+      // Card front: the headline figure and a three-line summary.
+      metric: { value: "12 months", label: "owning Meta Ads from ad to closed booking" },
+      brief: { problem: "An early-stage cargo company with no marketing team.", did: "Ran every Meta Ads campaign, the tracking, and the lead follow-up myself.", result: "Owned the full path from ad to closed booking for a year." },
       title: "Full-funnel Meta Ads for a Dubai cargo company",
       org: "Island Express Cargo",
       industry: "Logistics",
       period: "Nov 2019 – Nov 2020",
-      categories: ["paid"],
+      categories: ["social", "paid"],
       role: "Owner",
       context: "An early-stage cargo company with a small team and no dedicated marketing function.",
       objective: "Build awareness and inquiries through Facebook, WhatsApp, and the company website.",
@@ -418,90 +451,6 @@ window.PORTFOLIO = {
     }
   ],
 
-  /* ---------- SEO ---------- */
-  // Search engine optimization work, one entry per project. Each project
-  // lists what was done, grouped by area. Add a project by copying one.
-  // Leave projects: [] to hide the section.
-  seo: {
-    intro: "I treat SEO as the organic side of the same job: find what people actually search for, build pages that answer it, and make sure search engines can crawl, index, and show them.",
-    // The steps shown under the heading. Each item is one step.
-    process: ["keyword research", "content", "on-page", "crawl & index", "local listing", "measure"],
-    projects: [
-      {
-        id: "seo-mk",
-        name: "Local SEO for an auto repair shop",
-        org: "MK Car Repair (freelance client)",
-        location: "Al Ain, UAE",
-        period: "Nov 2024 – May 2025",
-        role: "Freelance, sole marketer",
-        summary: "I built the site, so I owned its SEO from the start: keyword research, the content, on-page optimization, getting pages crawled and indexed, and the shop's local listing.",
-        groups: [
-          { label: "Keyword research", items: [
-            "Used keyword research tools to find what drivers in the area actually search for.",
-            "Chose page targets and blog topics from that search data, not from guesses."
-          ] },
-          { label: "Content", items: [
-            "Wrote and published three long-form blog posts on repair times, car maintenance, and fuel efficiency, each built around a real search question.",
-            "Structured every post with H2 and H3 headings that answer the question directly."
-          ] },
-          { label: "On-page", items: [
-            "Local-intent page titles and meta descriptions, such as a homepage title built around car repair and maintenance in Al Ain.",
-            "URL slugs, image alt text, canonical URLs, and social sharing tags.",
-            "Internal links from blog posts to the Services page and between related posts."
-          ] },
-          { label: "Crawling & indexing", items: [
-            "Submitted the XML sitemap in Google Search Console and requested indexing for new pages through URL Inspection.",
-            "Checked crawl and indexing status in Search Console to make sure every page could be found.",
-            "Compressed images to keep pages fast."
-          ] },
-          { label: "Local search", items: [
-            "Optimized the shop's Google Business Profile for local and Maps search."
-          ] },
-          { label: "Measurement", items: [
-            "Installed Google Tag Manager and set up GA4 to track site traffic."
-          ] }
-        ],
-        // Search Console figures. Shown as tiles with the note under them.
-        stats: [
-          { value: "11,000+", label: "Google Search impressions, with 100+ clicks" },
-          { value: "#1", label: "average position when people search the shop's name" },
-          { value: "4,600+", label: "impressions on one blog post, about repair times" },
-          { value: "5.7", label: "average position across all searches in March 2026, up from 22 to 29 in mid-2025" }
-        ],
-        statsNote: "Google Search Console, June 11, 2025 to October 9, 2026. Search Console keeps only 16 months of data, so these figures start after my work on the site ended in May 2025. I haven't worked on the site since then, so they show how the pages I built and optimized kept performing on their own. As of October 2026 the site still appears in Google results for \"car repair al ain\".",
-        tools: ["WordPress", "Google Search Console", "Google Business Profile", "Keyword research tools", "Google Tag Manager", "GA4"]
-      },
-      {
-        id: "seo-prime",
-        name: "Service and location landing pages",
-        org: "PRIME Philippines and GreatWork",
-        location: "Philippines",
-        period: "Mar 2026 – Present",
-        role: "Built",
-        summary: "I build the WordPress landing pages for both brands. Each page targets one service in one location, so it can rank on its own in organic search and also match the Google Ads campaigns that send traffic to it.",
-        groups: [
-          { label: "Page structure", items: [
-            "One page per property type and location, such as office space in Cebu, commercial lots in Cavite, and warehouses in Quezon City.",
-            "Supporting sections that answer local intent, such as why businesses choose that location."
-          ] },
-          { label: "On-page", items: [
-            "Title tag, H1, meta description, and URL slug built on the same \"[property type] for lease in [location]\" keyword.",
-            "Image alt text, descriptions, and captions."
-          ] },
-          { label: "Internal links", items: [
-            "Links from each page to the matching property listings, plus an inquiry form on the page."
-          ] },
-          { label: "Content", items: [
-            "Page copy aligned to each campaign's keywords and ad copy, so the page matches what the searcher typed."
-          ] },
-          { label: "Site issues", items: [
-            "Site-level fixes handled with IT and developers."
-          ] }
-        ],
-        tools: ["WordPress", "On-page SEO"]
-      }
-    ]
-  },
 
   /* ---------- Performance dashboard ---------- */
   // Only cleared, aggregate figures. Values marked floor: true are
@@ -510,9 +459,9 @@ window.PORTFOLIO = {
   dashboard: {
     intro: "Results from Google Ads and Salesforce since March 16, 2026. Lead counts come from Salesforce, not from Google Ads conversion totals. Figures marked + are minimums and keep growing.",
     // The date range every figure below covers. Shown on the site as-is.
-    asOf: "Since {{since}}",
+    asOf: "{{period}}",
     periods: [
-      { id: "p2026", label: "Since {{since}}", note: "From the start of my Google Ads work on both accounts." }
+      { id: "p2026", label: "{{period}}", note: "From the start of my Google Ads work on both accounts." }
     ],
     categories: [
       { id: "prime", label: "PRIME Philippines", detail: "Commercial real estate · B2B" },
@@ -585,62 +534,13 @@ window.PORTFOLIO = {
       { metric: "ctr",         category: "prime",     figure: "primeCtr" },
       { metric: "ctr",         category: "greatwork", figure: "gwCtr" }
     ],
-    // The monthly chart reads the MONTHLY DATA block at the top of this file.
     notes: [
       "GreatWork lead counts include website form leads that could not be tagged by channel while Google Ads tracking was being fixed, and exclude July 11 to 13, 2026, when conversion tracking broke.",
       "Results reflect campaign, sales, and website work across the team. My part is described in each case study.",
-      "Totals marked + are minimums since {{since}}. The monthly chart shows actual counts for each month."
+      "Totals marked + are minimums for {{period}}."
     ]
   },
 
-  /* ---------- Lead journey (attribution workflow) ---------- */
-  // role: short tag for my part. level: "own" | "build" | "report" | "sales"
-  journey: {
-    intro: "How a search turns into a sales opportunity at PRIME and GreatWork, and which parts are mine. Click IDs carry each lead from the ad click into Salesforce, and qualified status flows back to Google Ads as an offline conversion. Follow-up and opportunities are handled by sales.",
-    stages: [
-      {
-        id: "ad", label: "Advertising", level: "own", role: "I own this",
-        detail: "Google Ads Search, Performance Max, and Display for both accounts. I also optimize Meta Ads and fixed its conversion tracking for PRIME Philippines.",
-        tools: ["Google Ads", "Meta Ads"]
-      },
-      {
-        id: "site", label: "Website visit", level: "build", role: "I build (PRIME pages)",
-        detail: "I build and maintain the WordPress landing pages for PRIME's campaigns, including on-page SEO. Site-level issues are handled with IT and developers.",
-        tools: ["WordPress", "On-page SEO"]
-      },
-      {
-        id: "tracking", label: "Conversion tracking", level: "build", role: "I implement, with developers",
-        detail: "Lead-form and purchase conversions tracked through Google Tag Manager, GA4, and Google Ads, including Enhanced Conversions. Developers handle code changes on the site.",
-        tools: ["GTM", "GA4", "Enhanced Conversions"]
-      },
-      {
-        id: "lead", label: "Salesforce lead", level: "report", role: "I verify and reconcile",
-        detail: "Leads land in Salesforce with the Google click ID (GCLID, GBRAID, or WBRAID), UTM values, and lead source, which is how I confirm which ones came from Google Ads. I check and reconcile them using read-only access.",
-        tools: ["Salesforce (read-only)"]
-      },
-      {
-        id: "qualify", label: "Qualification", level: "report", role: "I report on this",
-        detail: "Leads are qualified in Salesforce. Qualified status is sent back to Google Ads as an offline conversion in both accounts, and I track the qualified-lead rate by account and campaign to steer budget.",
-        tools: ["Salesforce reports"]
-      },
-      {
-        id: "followup", label: "Sales follow-up", level: "sales", role: "Sales team",
-        detail: "Sales teams contact and work the leads. This stage is not mine; I use its outcomes to judge campaign quality.",
-        tools: []
-      },
-      {
-        id: "opportunity", label: "Opportunity", level: "report", role: "I report on this",
-        detail: "Opportunities are created by sales. My scorecard follows cost per qualified lead and lead-to-opportunity rate so ad budgets answer to pipeline, not clicks.",
-        tools: ["Scorecard"]
-      }
-    ],
-    legend: [
-      { level: "own", label: "Own" },
-      { level: "build", label: "Build or implement" },
-      { level: "report", label: "Verify and report" },
-      { level: "sales", label: "Sales team" }
-    ]
-  },
 
   /* ---------- Skills ---------- */
   skills: [
@@ -685,9 +585,11 @@ window.PORTFOLIO = {
     {
       group: "AI workflows",
       items: [
-        { name: "Claude", how: "Reporting and data analysis, using read-only Google Ads MCP and Salesforce connections." },
+        { name: "Claude", how: "Reporting and data analysis on read-only Google Ads MCP and Salesforce connections." },
+        { name: "Ad copy & campaign builds", how: "Drafting ad copy and structuring new Google Ads campaigns with AI, then refining by hand." },
+        { name: "Troubleshooting", how: "Working through conversion tracking and website issues with AI." },
         { name: "ChatGPT", how: "Search term, competitor, and ad copy analysis." },
-        { name: "Generative imagery", how: "Visuals for landing pages and social content." }
+        { name: "Image creation & enhancement", how: "Creating and enhancing images for landing pages and social content." }
       ]
     },
     {
@@ -705,24 +607,7 @@ window.PORTFOLIO = {
   // { title: "...", image: "assets/img/file.jpg", alt: "...", category: "Landing page",
   //   context: "What it is", role: "What I did", year: "2026" }
   // The section stays hidden while this list is empty.
-  gallery: [
-    { title: "Warehouse for lease in Quezon City: hero", image: "assets/img/work/prime-warehouse-qc-hero.jpg",
-      alt: "Landing page hero with the headline Warehouse For Lease in Quezon City for Efficient Business Operations and an Inquire Now button",
-      category: "Landing page", context: "A PRIME Philippines service and location page. The target keyword, warehouse for lease in Quezon City, leads the H1, title tag, meta description, and URL.",
-      role: "Built the page in WordPress and wrote the on-page SEO.", year: "2026" },
-    { title: "Warehouse for lease in Quezon City: listings", image: "assets/img/work/prime-warehouse-qc-listings.jpg",
-      alt: "Section titled Curated Warehouse For Lease In Quezon City with three property listing cards",
-      category: "Landing page", context: "The keyword repeats in a supporting heading, and each card links to its property listing page.",
-      role: "Built the section and the internal links to the listings.", year: "2026" },
-    { title: "Warehouse for lease in Quezon City: location section", image: "assets/img/work/prime-warehouse-qc-overview.jpg",
-      alt: "Section titled Why Businesses Choose Quezon City for Warehouse Leasing with body copy and a warehouse photo",
-      category: "Landing page", context: "Copy that answers local intent: road access, truck access, and the specifications occupiers compare.",
-      role: "Built the section and optimized the copy and image for search.", year: "2026" },
-    { title: "Warehouse for lease in Quezon City: inquiry form", image: "assets/img/work/prime-warehouse-qc-inquiry.jpg",
-      alt: "Inquiry section titled We Advise. You Advance. with a lead form asking for name, company, and email",
-      category: "Landing page", context: "The inquiry form on the page. Submissions are created as leads in Salesforce.",
-      role: "Built the page and set up conversion tracking on the form.", year: "2026" }
-  ],
+  gallery: [],
 
   /* ---------- Certifications & education ---------- */
   // "image": a photo or scan of the certificate in site/assets/img/certs/.
