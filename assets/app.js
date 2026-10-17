@@ -101,6 +101,11 @@
   ].filter(function (s) { return s.on; });
 
   $("#brand").innerHTML = "<a href='#top'>" + esc(P.name) + "</a>";
+  if (P.email) {
+    var mail = document.createElement("a");
+    mail.className = "btn small primary nav-email"; mail.href = "mailto:" + P.email; mail.textContent = "Email me";
+    var tgl = $("#nav-toggle"); tgl.parentNode.insertBefore(mail, tgl);
+  }
   $("#nav-list").innerHTML = sections.map(function (s) {
     return "<li><a href='#" + s.id + "'>" + esc(s.label) + "</a></li>";
   }).join("");
@@ -123,18 +128,31 @@
     var trace = has(H.trace) ? "<p class='trace' aria-label='How I measure a lead'>" + H.trace.map(function (t, i) {
       return "<span style='--i:" + i + "'" + (i === H.trace.length - 1 ? " class='end'" : "") + ">" + esc(t) + "</span>";
     }).join("<i aria-hidden='true'>›</i>") + "</p>" : "";
+    var PATH_ICON = {
+      search: "<circle cx='11' cy='11' r='6'/><path d='M20 20l-4.5-4.5'/>",
+      click: "<path d='M9 3v3M4.5 5l2 2M3 9.5h3'/><path d='M10 10l9 3.5-4 1.5-1.5 4z'/>",
+      form: "<rect x='4' y='3' width='16' height='18' rx='2'/><path d='M8 8h8M8 12h8M8 16h5'/>",
+      crm: "<ellipse cx='12' cy='6' rx='7' ry='3'/><path d='M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6'/>",
+      check: "<circle cx='12' cy='12' r='8'/><path d='M8.5 12.5l2.5 2.5 4.5-5'/>"
+    };
+    var pathCard = has(H.path) ? "<aside class='lead-path' aria-label='How a lead moves from search to qualified'><p class='eyebrow'>How a lead moves</p><ol>" +
+      H.path.map(function (p, i) {
+        return "<li style='--i:" + i + "'" + (i === H.path.length - 1 ? " class='end'" : "") + "><span class='lp-ico' aria-hidden='true'><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'>" + (PATH_ICON[p.icon] || "") + "</svg></span>" +
+          "<span class='lp-txt'><strong>" + esc(p.step) + "</strong><em>" + esc(p.tool) + "</em></span></li>";
+      }).join("") + "</ol><span class='lp-dot' aria-hidden='true'></span></aside>" : "";
+    if (pathCard) trace = "";
     var asOf = C.dashboard && C.dashboard.asOf ? "<p class='ledger-note'>" + esc(C.dashboard.asOf) + ". Lead figures from Salesforce.</p>" : "";
     var stats = has(H.stats) ? "<div class='ledger-wrap'><dl class='ledger'>" + H.stats.map(function (s) {
       return "<div><dt>" + esc(s.label) + "</dt><dd data-count>" + esc(s.value) + "</dd>" + (s.note ? "<p>" + esc(s.note) + "</p>" : "") + "</div>";
     }).join("") + "</dl>" + asOf + "</div>" : "";
     $("#top").innerHTML =
       "<div class='wrap hero-grid'>" +
-        "<div class='hero-main'>" +
+        "<div class='hero-top'><div class='hero-main'>" +
           "<p class='eyebrow'>" + esc(P.title) + (P.focus ? " · " + esc(P.focus) : "") + "</p>" +
           "<h1>" + esc(P.name) + "</h1>" +
           "<p class='lede'>" + esc(H.lede) + "</p>" + trace +
           "<div class='ctas'>" + ctas + "</div>" +
-        "</div>" +
+        "</div>" + pathCard + "</div>" +
         stats +
       "</div>";
   })();
@@ -239,7 +257,7 @@
     }
     var cards = "<div class='cases'>" + C.caseStudies.map(function (c) {
       var rid = "case-body-" + esc(c.id);
-      return "<article class='case' id='case-" + esc(c.id) + "' data-cats='" + esc((c.categories || []).join(" ")) + "'>" +
+      return "<article class='case" + (c.featured ? " featured" : "") + "' id='case-" + esc(c.id) + "' data-tone='" + esc((c.categories || [])[0] || "") + "' data-cats='" + esc((c.categories || []).join(" ")) + "'>" +
         "<div class='case-top'>" +
           "<p class='case-meta'><span>" + esc(c.period) + "</span>" + (c.role ? "<span class='role-tag'>" + esc(c.role) + "</span>" : "") + "</p>" +
           "<div class='case-head'>" + icon(c) + "<h3>" + esc(c.title) + "</h3></div>" +
@@ -291,6 +309,24 @@
   /* ---------- results dashboard ---------- */
   (function () {
     var D = C.dashboard; if (!D) return;
+    if (D.funnel && has(D.funnel.brands)) {
+      var F = D.funnel, widths = [100, 80, 62, 48];
+      var defs = (D.metrics || []).filter(function (m) { return m.definition && m.id !== "qualified"; });
+      $("#results").innerHTML = "<div class='wrap'>" + head("Results", "Performance, counted in the CRM", D.intro) +
+        "<div class='funnels'>" + F.brands.map(function (b) {
+          return "<article class='funnel' data-brand='" + esc(b.id) + "'><header><h3>" + esc(b.label) + "</h3>" + (b.detail ? "<p>" + esc(b.detail) + "</p>" : "") + "</header><ol class='f-stages'>" +
+            F.stages.map(function (st, i) {
+              var between = b.between && b.between[i] ? "<li class='f-between'>" + esc(b.between[i]) + "</li>" : (i < F.stages.length - 1 ? "<li class='f-between' aria-hidden='true'></li>" : "");
+              return "<li class='f-stage' style='--w:" + (widths[i] || 30) + "%;--o:" + (1 - i * 0.18).toFixed(2) + "'><div class='f-bar'><strong data-count>" + esc(b.values[i] || "") + "</strong><span>" + esc(st) + "</span></div></li>" + between;
+            }).join("") + "</ol>" + (b.footer ? "<p class='f-foot'>" + esc(b.footer) + "</p>" : "") + "</article>";
+        }).join("") + "</div>" +
+        "<details class='measure funnel-measure'><summary>How this is measured</summary><dl class='defs'>" +
+          defs.map(function (m) { return "<div><dt>" + esc(m.label) + " <span class='muted'>· " + esc(m.source || "") + "</span></dt><dd>" + esc(m.definition) + "</dd></div>"; }).join("") +
+        "</dl></details>" +
+        (has(D.notes) ? "<ul class='dash-notes'>" + D.notes.map(function (n) { return "<li>" + esc(n) + "</li>"; }).join("") + "</ul>" : "") +
+        "</div>";
+      return;
+    }
     var catById = {}; (D.categories || []).forEach(function (c, i) { c._i = i; catById[c.id] = c; });
     var metricsWithData = (D.metrics || []).filter(function (m) { return D.values.some(function (v) { return v.metric === m.id; }); });
     var state = { metric: metricsWithData[0] && metricsWithData[0].id, cat: "all", period: D.periods && D.periods[0] && D.periods[0].id };
@@ -575,7 +611,12 @@
   /* ---------- skills ---------- */
   (function () {
     if (!has(C.skills)) return;
-    $("#skills").innerHTML = "<div class='wrap'>" + head("Skills", "Tools and how I use them", "Described by what I actually do with each one, not by self-rated levels.") +
+    var kit = has(C.toolkit) ? "<ul class='toolkit' aria-label='Main tools'>" + C.toolkit.map(function (t) {
+      var mono = "<span class='tk-mono' style='--tk:" + esc(t.tone || "var(--accent)") + "' aria-hidden='true'>" + esc((function (n) { var w = n.replace(/[^A-Za-z0-9 ]/g, "").split(" ").filter(Boolean); return (w.length > 1 ? w.map(function (x) { return x[0]; }).join("") : w[0].slice(0, 2)).slice(0, 2).toUpperCase(); })(t.name)) + "</span>";
+      var logo = t.logo ? "<img class='tk-logo' src='" + esc(t.logo) + "' alt='' width='22' height='22' onerror=\"this.replaceWith(this.nextElementSibling.content.cloneNode(true))\"><template>" + mono + "</template>" : mono;
+      return "<li>" + logo + "<span>" + esc(t.name) + "</span></li>";
+    }).join("") + "</ul>" : "";
+    $("#skills").innerHTML = "<div class='wrap'>" + head("Skills", "Tools and how I use them", "Described by what I actually do with each one, not by self-rated levels.") + kit +
       "<div class='skills'>" + C.skills.map(function (g) {
         return "<section class='skill-group'><h3>" + esc(g.group) + "</h3><dl>" + g.items.map(function (it) {
           return "<div><dt>" + esc(it.name) + "</dt>" + (it.how ? "<dd>" + esc(it.how) + "</dd>" : "") + "</div>";
@@ -711,7 +752,7 @@
     $all("[data-count]").forEach(function (el) { countIO.observe(el); });
 
     // Fade sections in as they scroll into view.
-    var targets = $all(".sec-head, .ledger-wrap, .prose, .about-side, .role, .case, .chart-card, .dash-controls, .skill-group, .certs li, .c-row, .chips");
+    var targets = $all(".funnel, .toolkit, .sec-head, .ledger-wrap, .prose, .about-side, .role, .case, .chart-card, .dash-controls, .skill-group, .certs li, .c-row, .chips");
     targets.forEach(function (el) { el.classList.add("reveal"); });
     var revealIO = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add("in"); revealIO.unobserve(en.target); } });

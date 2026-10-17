@@ -46,7 +46,7 @@ window.PORTFOLIO = {
     primeLeads:     "500+",      // Salesforce, Google Ads leads
     gwLeads:        "400+",      // Salesforce, Google Ads + Website leads
     primeQualRate:  "50%+",
-    leadValue:      "₱150M+",    // estimated professional fees from reconciled PF receivables, not closed deals
+    leadValue:      "₱150M+",    // estimate: inquiry requirements + actual closed deals + actual purchases, reconciled by hand
     gwQualRate:     "31%+",
 
     primeClicks:    "33,000+",
@@ -90,20 +90,28 @@ window.PORTFOLIO = {
     lede: "I plan, build, track, and optimize paid campaigns on Google Ads and Meta Ads for businesses across real estate, automotive, and logistics. I judge the work by the leads that get confirmed and qualified in the CRM, not only by what the ad platform reports.",
     // The small trace line under the intro. Each item is one step.
     trace: ["search query", "ad click", "form submit", "Salesforce lead", "qualified"],
+    // The animated lead path beside the intro. "icon": search, click, form, crm, check.
+    path: [
+      { step: "Search query", tool: "Google Ads", icon: "search" },
+      { step: "Ad click", tool: "Google Ads", icon: "click" },
+      { step: "Form submit", tool: "Landing page · GTM + GA4", icon: "form" },
+      { step: "Salesforce lead", tool: "Salesforce", icon: "crm" },
+      { step: "Qualified", tool: "Sales team, synced back to Google Ads", icon: "check" }
+    ],
     // Headline figures. Only cleared figures belong here.
     stats: [
       { value: "{{campaignsTotal}}", label: "Google Ads campaigns managed across multiple accounts", note: "PRIME Philippines, GreatWork, and freelance client work" },
       { value: "{{primeLeads}}", label: "Google Ads leads confirmed in Salesforce, PRIME Philippines", note: "Counted in the CRM, not the ad platform" },
       { value: "{{gwLeads}}", label: "Google Ads and website leads in Salesforce, GreatWork", note: "Counted in the CRM, not the ad platform" },
       { value: "{{primeQualRate}}", label: "of PRIME's Google Ads leads reached qualified status", note: "Qualified in Salesforce by sales" },
-      { value: "{{leadValue}}", label: "estimated value of qualified leads", note: "Estimated professional fees, not closed deals or revenue" }
+      { value: "{{leadValue}}", label: "estimated value of PRIME and GreatWork inquiries", note: "From inquiry requirements, closed deals, and purchases. An estimate, not revenue" }
     ]
   },
 
   /* ---------- About ---------- */
   about: {
     paragraphs: [
-      "I manage Google Ads Search and Performance Max for two brands under PRIME Philippines Group: PRIME Philippines, a commercial real estate consultancy, and GreatWork, its flexible workspace brand. Including freelance work, I have managed {{campaignsTotal}} Google Ads campaigns.",
+      "I manage Google Ads Search and Performance Max for two brands under PRIME Philippines Group: PRIME Philippines, a commercial real estate consultancy, and GreatWork, its flexible workspace brand. I also run Google Ads and SEO for freelance clients.",
       "I cover the full search lifecycle, from keyword research and campaign builds to search term audits, bidding, and conversion tracking in Google Ads, GTM, and GA4. I also build the WordPress landing pages the campaigns send traffic to.",
       "I measure the work in Salesforce, not only in the ad platform: a lead counts once it reaches the CRM and moves through qualification. A 15-point audit checks both sides, and I use AI, including Claude connected read-only to Google Ads and Salesforce, for reporting, analysis, ad copy, campaign builds, troubleshooting, and images.",
       "Before PRIME I spent six years in the UAE: Meta Ads for a Dubai cargo company, catalog and content operations at InstaShop, and a freelance website, SEO, and Google Ads project for an auto repair shop."
@@ -130,9 +138,9 @@ window.PORTFOLIO = {
       end: "Present",
       summary: "Full ownership of Google Ads strategy across two accounts: PRIME Philippines (commercial real estate, B2B) and GreatWork (flexible workspace, B2B and B2C).",
       highlights: [
-        "Built and managed {{campaignsTotal}} Google Ads Search, Performance Max, and Display campaigns across both accounts.",
-        "{{primeLeads}} Google Ads leads for PRIME Philippines and {{gwLeads}} Google Ads and website leads for GreatWork, confirmed in Salesforce.",
-        "{{primeQualRate}} of PRIME Philippines' Google Ads leads reached qualified status in Salesforce."
+        "Own Google Ads strategy and builds for both accounts, from account structure to bidding and budgets.",
+        "Tie every Google Ads lead to its Salesforce record, so results are judged on qualified leads, not clicks.",
+        "Built 15+ service and location landing pages and set up or fixed 10+ conversion actions."
       ],
       responsibilities: [
         "Run keyword research, search term analysis, and negative keyword audits to tighten targeting and cut wasted spend.",
@@ -249,9 +257,10 @@ window.PORTFOLIO = {
   caseStudies: [
     {
       id: "two-accounts",
+      featured: true,
       // Card front: the headline figure and a three-line summary.
-      metric: { value: "{{campaignsTotal}}", label: "campaigns built and managed across both accounts" },
-      brief: { problem: "Two brands with different buyers, keywords, and conversion goals.", did: "Split campaigns by property segment, location, and conversion type.", result: "{{primeLeads}} PRIME and {{gwLeads}} GreatWork leads confirmed in Salesforce." },
+      metric: { value: "6", label: "PRIME property segments, plus GreatWork's B2B and B2C demand, in one workload" },
+      brief: { problem: "Two brands with different buyers, keywords, and conversion goals.", did: "Split campaigns by property segment, location, and conversion type.", result: "Lead quality readable per campaign, with every lead confirmed in Salesforce." },
       title: "Running paid search for two B2B brands at once",
       org: "PRIME Philippines and GreatWork",
       industry: "Commercial real estate · Flexible workspace",
@@ -268,9 +277,8 @@ window.PORTFOLIO = {
         "Use Auction Insights, impression share, and Performance Max asset reports to guide bid and budget changes."
       ],
       results: [
-        "{{campaignsTotal}} campaigns built and managed across both accounts.",
         "{{primeLeads}} PRIME Philippines Google Ads leads and {{gwLeads}} GreatWork Google Ads and website leads, confirmed in Salesforce.",
-        "{{primeQualRate}} of PRIME's Google Ads leads reached qualified status."
+        "Campaigns split by property segment and location for PRIME, and by lead form and direct purchase for GreatWork."
       ],
       takeaway: "Account structure is a measurement decision. Splitting by segment and conversion type is what made lead quality readable per campaign.",
       tools: ["Google Ads Search", "Performance Max", "Display", "Auction Insights"]
@@ -278,7 +286,7 @@ window.PORTFOLIO = {
     {
       id: "crm-measurement",
       // Card front: the headline figure and a three-line summary.
-      metric: { value: "{{primeQualRate}}", label: "of PRIME's Google Ads leads reached qualified status" },
+      metric: { value: "15-point", label: "audit that checks Google Ads results against Salesforce records" },
       brief: { problem: "Google Ads conversions and Salesforce leads rarely match.", did: "Built a 15-point audit that checks ad results against CRM records.", result: "Lead counts come from the CRM, and qualified status flows back to Google Ads." },
       title: "Measuring leads in Salesforce, not just in Google Ads",
       org: "PRIME Philippines and GreatWork",
@@ -306,7 +314,7 @@ window.PORTFOLIO = {
     {
       id: "tracking",
       // Card front: the headline figure and a three-line summary.
-      metric: { value: "GTM + GA4", label: "conversion tracking set up and fixed with developers" },
+      metric: { value: "10+", label: "conversion actions set up and fixed, each shared across several campaigns" },
       brief: { problem: "Several conversion types on a website shared with IT.", did: "Separate conversion actions, Enhanced Conversions, and tracking checks in every audit.", result: "Clean lead-form and purchase tracking for GreatWork; Meta Ads tracking restored for PRIME." },
       title: "Conversion tracking for lead forms and purchases",
       org: "PRIME Philippines and GreatWork",
@@ -324,6 +332,7 @@ window.PORTFOLIO = {
         "Tracking checks built into the periodic audit so breakages surface early."
       ],
       results: [
+        "10+ conversion actions set up or fixed; because actions are shared, each fix covers several campaigns.",
         "Lead-form and purchase conversions tracked separately for GreatWork.",
         "Meta Ads conversion tracking restored for PRIME Philippines."
       ],
@@ -332,8 +341,9 @@ window.PORTFOLIO = {
     },
     {
       id: "landing-pages",
+      featured: true,
       // Card front: the headline figure and a three-line summary.
-      metric: { value: "SEO + Ads", label: "every page built to rank and to match its campaign" },
+      metric: { value: "15+", label: "service and location landing pages built for PRIME Philippines and GreatWork" },
       brief: { problem: "Specific property searches landing on generic pages.", did: "One page per property type and location, keyword-led from title tag to URL.", result: "Pages that serve both the paid click and the organic search." },
       title: "Service and location landing pages",
       org: "PRIME Philippines and GreatWork",
@@ -352,7 +362,7 @@ window.PORTFOLIO = {
         "Page copy aligned to each campaign's keywords and ad copy, with generative AI imagery for property and workspace pages."
       ],
       results: [
-        "Service and location landing pages built and maintained for PRIME's Google Ads campaigns, each optimized for organic search."
+        "15+ service and location landing pages built and maintained for PRIME Philippines and GreatWork, each optimized for organic search."
       ],
       takeaway: "The ad and the page are one experience. A page built around one service in one location serves both the paid click and the organic search.",
       tools: ["WordPress", "On-page SEO", "Generative AI imagery"]
@@ -360,8 +370,8 @@ window.PORTFOLIO = {
     {
       id: "ai-reporting",
       // Card front: the headline figure and a three-line summary.
-      metric: { value: "Read-only", label: "AI connections to Google Ads and Salesforce" },
-      brief: { problem: "Weekly reports, fixes, and visuals take hours by hand.", did: "Claude on read-only data, plus AI for ad copy, campaign builds, troubleshooting, and images.", result: "Faster, checkable work with no write access to either system." },
+      metric: { value: "~2 hrs", label: "saved a day on reporting and analysis, by my estimate" },
+      brief: { problem: "Weekly reports, fixes, and visuals take hours by hand.", did: "Claude on read-only data, plus AI for ad copy, campaign builds, troubleshooting, and images.", result: "Faster, checkable work, with no write access to either system." },
       title: "AI across campaigns, reporting, troubleshooting, and images",
       org: "PRIME Philippines and GreatWork",
       industry: "Marketing operations",
@@ -379,6 +389,7 @@ window.PORTFOLIO = {
         "Generative AI to create and enhance images for landing pages and social content."
       ],
       results: [
+        "Roughly 2 hours a day saved on reporting and analysis, by my own estimate.",
         "Reporting workflows automated on read-only connections, with no write access to either system.",
         "AI built into day-to-day campaign, analysis, troubleshooting, and creative work, not only reporting."
       ],
@@ -386,7 +397,35 @@ window.PORTFOLIO = {
       tools: ["Claude", "Google Ads MCP (read-only)", "Salesforce connector (read-only)", "ChatGPT", "Generative AI imagery"]
     },
     {
+      id: "meta-ads-cargo",
+      // Card front: the headline figure and a three-line summary.
+      metric: { value: "12 months", label: "owning Meta Ads from ad to closed booking" },
+      brief: { problem: "An early-stage cargo company with no marketing team.", did: "Ran every Meta Ads campaign, the tracking, and the lead follow-up myself.", result: "Owned the full path from ad to closed booking for a year." },
+      title: "Full-funnel Meta Ads for a Dubai cargo company",
+      org: "Island Express Cargo",
+      industry: "Logistics",
+      period: "Nov 2019 – Nov 2020",
+      categories: ["social", "paid"],
+      role: "Owner",
+      context: "An early-stage cargo company with a small team and no dedicated marketing function.",
+      objective: "Build awareness and inquiries through Facebook, WhatsApp, and the company website.",
+      contribution: "I ran the marketing function largely on my own, including every Meta Ads campaign from creation to closing the lead.",
+      implementation: [
+        "Meta Ads campaigns created and launched end to end: strategy, creative, budget, and optimization.",
+        "Conversion tracking set up so each inquiry could be traced to its campaign.",
+        "Followed up the inquiries myself and worked them through to closed bookings.",
+        "Regular content and community management across Facebook and WhatsApp.",
+        "Targeting and creative adjusted from Facebook Insights and website analytics."
+      ],
+      results: [
+        "Owned the full path from ad to closed lead for a full year."
+      ],
+      takeaway: "Where I learned to connect ad performance to what happens after the click.",
+      tools: ["Meta Ads", "Facebook Insights", "WhatsApp Business"]
+    },
+    {
       id: "mk-car-repair",
+      featured: true,
       // Card front: the headline figure and a three-line summary.
       metric: { value: "57,000+", label: "ad impressions on a very limited daily budget" },
       brief: { problem: "A local shop that needed a website and a way to be found in search.", did: "Built the site, local SEO, tracking, and a Google Ads Search campaign.", result: "#1 for the shop's name, and on page 1 of Google by March 2026." },
@@ -421,33 +460,6 @@ window.PORTFOLIO = {
       resultsNote: "Ad figures are from Google Ads and GA4; the campaign ran only during my engagement, November 2024 to May 2025. Search figures are from Google Search Console, June 11, 2025 to October 9, 2026. Search Console keeps only 16 months of data, so they start after my work on the site ended in May 2025. I haven't worked on the site since, so they show how the pages I built kept performing on their own.",
       takeaway: "Owning the site, the SEO, and the ads together shows quickly where each channel helps the other.",
       tools: ["WordPress", "Keyword research tools", "On-page SEO", "Google Search Console", "Google Business Profile", "Google Tag Manager", "GA4", "Google Ads Search"]
-    },
-    {
-      id: "meta-ads-cargo",
-      // Card front: the headline figure and a three-line summary.
-      metric: { value: "12 months", label: "owning Meta Ads from ad to closed booking" },
-      brief: { problem: "An early-stage cargo company with no marketing team.", did: "Ran every Meta Ads campaign, the tracking, and the lead follow-up myself.", result: "Owned the full path from ad to closed booking for a year." },
-      title: "Full-funnel Meta Ads for a Dubai cargo company",
-      org: "Island Express Cargo",
-      industry: "Logistics",
-      period: "Nov 2019 – Nov 2020",
-      categories: ["social", "paid"],
-      role: "Owner",
-      context: "An early-stage cargo company with a small team and no dedicated marketing function.",
-      objective: "Build awareness and inquiries through Facebook, WhatsApp, and the company website.",
-      contribution: "I ran the marketing function largely on my own, including every Meta Ads campaign from creation to closing the lead.",
-      implementation: [
-        "Meta Ads campaigns created and launched end to end: strategy, creative, budget, and optimization.",
-        "Conversion tracking set up so each inquiry could be traced to its campaign.",
-        "Followed up the inquiries myself and worked them through to closed bookings.",
-        "Regular content and community management across Facebook and WhatsApp.",
-        "Targeting and creative adjusted from Facebook Insights and website analytics."
-      ],
-      results: [
-        "Owned the full path from ad to closed lead for a full year."
-      ],
-      takeaway: "Where I learned to connect ad performance to what happens after the click.",
-      tools: ["Meta Ads", "Facebook Insights", "WhatsApp Business"]
     }
   ],
 
@@ -457,7 +469,21 @@ window.PORTFOLIO = {
   // published as minimums and drawn as "at least". The figures come from
   // the NUMBERS block at the top of this file.
   dashboard: {
-    intro: "Results from Google Ads and Salesforce since March 16, 2026. Lead counts come from Salesforce, not from Google Ads conversion totals. Figures marked + are minimums and keep growing.",
+    intro: "From the first impression to a qualified lead, {{period}}. Lead counts come from Salesforce, not from Google Ads conversion totals. Figures marked + are minimums and keep growing.",
+    // The funnel on Results. Each value points at a figure in NUMBERS via {{name}}.
+    funnel: {
+      stages: ["Impressions", "Clicks", "Salesforce leads", "Leads qualified"],
+      brands: [
+        { id: "prime", label: "PRIME Philippines", detail: "Commercial real estate · B2B",
+          values: ["{{primeImpr}}", "{{primeClicks}}", "{{primeLeads}}", "{{primeQualRate}}"],
+          between: ["{{primeCtr}} click-through rate", "", ""],
+          footer: "{{primeCampaigns}} campaigns" },
+        { id: "greatwork", label: "GreatWork", detail: "Flexible workspace · B2B and B2C",
+          values: ["{{gwImpr}}", "{{gwClicks}}", "{{gwLeads}}", "{{gwQualRate}}"],
+          between: ["{{gwCtr}} click-through rate", "", ""],
+          footer: "{{gwCampaigns}} campaigns · leads include website forms" }
+      ]
+    },
     // The date range every figure below covers. Shown on the site as-is.
     asOf: "{{period}}",
     periods: [
@@ -537,17 +563,34 @@ window.PORTFOLIO = {
     notes: [
       "GreatWork lead counts include website form leads that could not be tagged by channel while Google Ads tracking was being fixed, and exclude July 11 to 13, 2026, when conversion tracking broke.",
       "Results reflect campaign, sales, and website work across the team. My part is described in each case study.",
-      "Totals marked + are minimums for {{period}}."
+      "Totals marked + are minimums for {{period}}.",
+      "The ₱150M+ estimated inquiry value at the top of the page combines the estimated value of inquiries from their stated requirements with actual closed deals and purchases, reconciled by hand. It is an estimate, not revenue."
     ]
   },
 
+
+  /* ---------- Toolkit strip (top of Skills) ----------
+     "logo": optional path to an official logo file you add yourself, e.g.
+     assets/img/logos/google-ads.png. If the file isn't there, a coloured
+     monogram shows instead. */
+  toolkit: [
+    { name: "Google Ads", logo: "assets/img/logos/google-ads.png", tone: "#8BAEF2" },
+    { name: "GA4", logo: "assets/img/logos/ga4.png", tone: "#E0B35C" },
+    { name: "Google Tag Manager", logo: "assets/img/logos/gtm.png", tone: "#8BAEF2" },
+    { name: "Search Console", logo: "assets/img/logos/search-console.png", tone: "#5EC8D8" },
+    { name: "Meta Ads", logo: "assets/img/logos/meta.png", tone: "#B49CF2" },
+    { name: "Salesforce", logo: "assets/img/logos/salesforce.png", tone: "#4CC39E" },
+    { name: "WordPress", logo: "assets/img/logos/wordpress.png", tone: "#5EC8D8" },
+    { name: "Claude", logo: "assets/img/logos/claude.png", tone: "#F2A07B" },
+    { name: "ChatGPT", logo: "assets/img/logos/chatgpt.png", tone: "#4CC39E" }
+  ],
 
   /* ---------- Skills ---------- */
   skills: [
     {
       group: "Paid advertising",
       items: [
-        { name: "Google Ads Search, Display & Performance Max", how: "{{campaignsTotal}} campaigns managed across multiple accounts." },
+        { name: "Google Ads Search, Display & Performance Max", how: "Account structure, builds, and optimization for B2B and B2C lead generation." },
         { name: "Keyword & search term management", how: "Weekly search term reviews and negative keyword audits." },
         { name: "Bid & budget management", how: "Guided by Auction Insights, impression share, and CRM lead quality." },
         { name: "Meta Ads", how: "Optimization and tracking fixes at PRIME; full ownership at Island Express Cargo." }
@@ -559,8 +602,7 @@ window.PORTFOLIO = {
         { name: "Google Tag Manager", how: "Conversion tags and triggers built on custom events, data layer variables, first-party cookies, and user-provided data." },
         { name: "Conversion tracking", how: "End to end, from the Google Ads click to the form submission on WordPress to the lead in Salesforce." },
         { name: "GA4", how: "Conversion setup and troubleshooting for both accounts." },
-        { name: "Enhanced Conversions", how: "Configured with developers." },
-        { name: "Looker Studio", how: "" }
+        { name: "Enhanced Conversions", how: "Configured with developers." }
       ]
     },
     {
